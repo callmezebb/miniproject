@@ -1,0 +1,406 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #000;
+    color: white;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-img {
+    height: 40px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #64b5f6;
+}
+
+.nav-links a.active {
+    color: #64b5f6;
+}
+
+.logout-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+}
+
+.booking-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.booking-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.booking-header h1 {
+    margin-bottom: 10px;
+}
+
+.booking-header p {
+    color: #ccc;
+}
+
+.booking-step {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px;
+}
+
+.booking-step h2 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.salons-grid, .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.salon-card, .service-card {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.salon-card:hover, .service-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #64b5f6;
+}
+
+.salon-card.selected, .service-card.selected {
+    background: rgba(100, 181, 246, 0.2);
+    border-color: #64b5f6;
+}
+
+.salon-name, .service-name {
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.salon-info, .service-info {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.selected-salon-info {
+    margin-bottom: 20px;
+}
+
+.selected-salon-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    margin-bottom: 20px;
+    border-left: 3px solid #64b5f6;
+}
+
+.selected-salon-header h3 {
+    margin-bottom: 5px;
+}
+
+.selected-salon-header p {
+    color: #ccc;
+    font-size: 0.9rem;
+}
+
+.datetime-selection {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+}
+
+.date-picker h3, .time-slots h3 {
+    margin-bottom: 15px;
+}
+
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    margin-bottom: 20px;
+}
+
+.time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.time-slot {
+    padding: 10px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.time-slot:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.time-slot.selected {
+    background: rgba(100, 181, 246, 0.2);
+    border-color: #64b5f6;
+}
+
+.time-slot.unavailable {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.closed-message, .no-slots-message {
+    color: #ff6b6b;
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.booking-summary {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+}
+
+.summary-details {
+    margin: 15px 0;
+}
+
+.summary-details p {
+    margin: 10px 0;
+    color: #ccc;
+}
+
+.summary-details strong {
+    color: white;
+}
+
+.customer-details {
+    margin-top: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ccc;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.form-group textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.booking-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.nav-btn {
+    padding: 12px 24px;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background: white;
+    color: black;
+}
+
+.back-btn {
+    visibility: hidden;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #000;
+    padding: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+}
+
+.confirmation-details {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.confirmation-details p {
+    margin: 10px 0;
+}
+
+.close-btn {
+    padding: 10px 20px;
+    background: #64b5f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #1976d2;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .datetime-selection {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-step {
+        padding: 20px;
+    }
+
+    .nav-btn {
+        padding: 10px 20px;
+    }
+    .time-slots {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.time-slot {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.time-slot:hover:not(.unavailable) {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #64b5f6;
+}
+
+.time-slot.selected {
+    background: rgba(100, 181, 246, 0.2);
+    border-color: #64b5f6;
+}
+
+.time-slot.unavailable {
+    background: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.3);
+    cursor: not-allowed;
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.closed-message, .no-slots-message {
+    color: #ff6b6b;
+    text-align: center;
+    padding: 15px;
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid rgba(255, 107, 107, 0.2);
+    border-radius: 4px;
+}
+
+.datetime-selection {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .datetime-selection {
+        grid-template-columns: 1fr;
+    }
+    
+    .time-slots-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+}
+
+}

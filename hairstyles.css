@@ -1,0 +1,150 @@
+/* Main container styles */
+.hairstyles-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Filter section */
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.filter-btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Hairstyles grid */
+.hairstyles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* Hairstyle card */
+.hairstyle-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.hairstyle-card:hover {
+    transform: translateY(-5px);
+}
+
+.hairstyle-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.hairstyle-info {
+    padding: 1.5rem;
+}
+
+.hairstyle-info h3 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.hairstyle-info p {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Book button */
+.style-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.style-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .hairstyles-container {
+        padding: 1rem;
+    }
+
+    .hairstyles-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
+
+    .filter-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .hairstyle-image {
+        height: 200px;
+    }
+
+    .hairstyle-info {
+        padding: 1rem;
+    }
+
+    .hairstyle-info h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Loading state */
+.loading {
+    text-align: center;
+    padding: 2rem;
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

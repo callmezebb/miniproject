@@ -1,0 +1,139 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #e0e0e0; /* Light text color */
+}
+
+h1 {
+    font-size: 2rem;
+    color: #ffffff; /* White text for headings */
+    margin-bottom: 1rem;
+}
+
+p {
+    font-size: 0.9rem;
+    color: #b0b0b0; /* Slightly lighter text for paragraphs */
+}
+
+/* Container Styles */
+.login-container, .register-container {
+    background-color: #1e1e1e; /* Darker container background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-card, .register-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Form Styles */
+form {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    width: 100%;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    color: #e0e0e0; /* Light text for labels */
+    margin-bottom: 0.5rem;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #333; /* Darker border */
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #2a2a2a; /* Dark input background */
+    color: #e0e0e0; /* Light text for input */
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #007bff; /* Blue border on focus */
+}
+
+/* Button Styles */
+button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #007bff; /* Primary blue button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+button:disabled {
+    background-color: #444; /* Disabled button background */
+    cursor: not-allowed;
+}
+
+/* Links */
+a {
+    color: #007bff; /* Blue links */
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Additional Styles for Login and Registration */
+.register-link, .login-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #b0b0b0; /* Subtle text for links */
+}
+
+.register-link a, .login-link a {
+    font-weight: 500;
+    color: #007bff; /* Blue links */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .login-container, .register-container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    input, select {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}

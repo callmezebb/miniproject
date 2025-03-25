@@ -1,0 +1,115 @@
+\miniproject\salon-registration.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salon Registration - GentsCut</title>
+    <link rel="stylesheet" href="salon-registration.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="registration-container">
+        <div class="registration-header">
+            <img src="logo2.webp" alt="GentsCut Logo" class="logo">
+            <h1>Complete Your Salon Profile</h1>
+            <p>Provide your salon details to start accepting appointments</p>
+        </div>
+
+        <form id="salon-registration-form" class="registration-form">
+            <div class="form-section basic-info">
+                <h2><i class="fas fa-store"></i> Basic Information</h2>
+                
+                <div class="form-group">
+                    <label for="salonName">Salon Name</label>
+                    <input type="text" id="salonName" name="salonName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required 
+                           placeholder="Enter your full address">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Contact Number</label>
+                    <input type="tel" id="phone" name="phone" required 
+                           pattern="[0-9]{10}" placeholder="Enter 10-digit number">
+                </div>
+            </div>
+
+            <div class="form-section working-hours">
+                <h2><i class="far fa-clock"></i> Working Hours</h2>
+                
+                <div class="hours-grid">
+                    <div class="day-select">
+                        <label>Working Days</label>
+                        <div class="days-checkboxes">
+                            <label><input type="checkbox" name="days" value="mon" checked> Mon</label>
+                            <label><input type="checkbox" name="days" value="tue" checked> Tue</label>
+                            <label><input type="checkbox" name="days" value="wed" checked> Wed</label>
+                            <label><input type="checkbox" name="days" value="thu" checked> Thu</label>
+                            <label><input type="checkbox" name="days" value="fri" checked> Fri</label>
+                            <label><input type="checkbox" name="days" value="sat" checked> Sat</label>
+                            <label><input type="checkbox" name="days" value="sun"> Sun</label>
+                        </div>
+                    </div>
+                    
+                    <div class="time-select">
+                        <label>Business Hours</label>
+                        <div class="time-inputs">
+                            <input type="time" id="openTime" name="openTime" required>
+                            <span>to</span>
+                            <input type="time" id="closeTime" name="closeTime" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section services">
+                <h2><i class="fas fa-cut"></i> Services</h2>
+                <div id="services-container">
+                    <!-- Default service row -->
+                    <div class="service-row">
+                        <input type="text" class="service-name" placeholder="Service name" required>
+                        <input type="number" class="service-price" placeholder="Price" required min="0">
+                        <input type="number" class="service-duration" placeholder="Duration (min)" required min="15" step="15">
+                        <button type="button" class="remove-service" onclick="removeService(this)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="button" class="add-service-btn" onclick="addService()">
+                    <i class="fas fa-plus"></i> Add Service
+                </button>
+            </div>
+
+            <div class="form-section">
+                <h2><i class="fas fa-images"></i> Salon Images</h2>
+                <div class="image-upload">
+                    <label for="salonImages">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Upload Salon Images</span>
+                        <small>(Max 5 images)</small>
+                    </label>
+                    <input type="file" id="salonImages" multiple accept="image/*" 
+                           onchange="handleImageUpload(this)">
+                </div>
+                <div id="image-preview" class="image-preview"></div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-check"></i> Complete Registration
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="js/auth.js"></script>
+    <script src="salon-registration.js"></script>
+</body>
+</html>

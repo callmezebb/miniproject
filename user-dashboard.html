@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Men's Grooming</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="user-dashboard.html">
+            <img src="logo2.webp" alt="GentsCut" style="height: 70px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="face-analysis.html">Face Analysis</a></li>
+            <li><a href="hairstyles.html">Hairstyles</a></li>
+            <li><a href="booking.html" class="book-now">Book Now</a></li>
+            <li><a onclick="logout()">Logout</a></li>
+
+
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Perfect Style for Every Man</h1>
+            <p>Discover your ideal hairstyle based on your face shape and personal style</p>
+            <div class="cta-buttons">
+                <button class="primary-btn" onclick="window.location.href='face-analysis.html'">
+                    <i class="fas fa-camera"></i> Analyze Face Shape
+                </button>
+                <button class="secondary-btn" onclick="window.location.href='booking.html'">
+                    <i class="fas fa-calendar"></i> Book Appointment
+                </button>
+            </div>
+        </div>
+    </section>
+
+<!-- Services Section -->
+<section id="services" class="section">
+    <h2 class="section-title">Our Services</h2>
+    
+    <!-- Service Pages Container -->
+    <!-- Haircut Service Page -->
+<div class="service-page">
+    <div class="service-content">
+        <h3>Professional Haircut</h3>
+        <p>Experience precision cutting techniques tailored to your face shape and personal style. Our expert barbers will consult with you to understand your preferences and create a look that enhances your features.</p>
+        <p>Each haircut includes a relaxing shampoo, scalp massage, and styling with premium products to ensure you leave looking and feeling your best.</p>
+        <div class="service-buttons">
+            <button class="service-btn book-btn" onclick="window.location.href='booking.html'">Book Now</button>
+            <a href="hairstyles.html" class="service-btn explore-btn">Explore More</a>
+        </div>
+    </div>
+    <div class="service-image">
+        <img src="hair cutting.webp" alt="Professional Haircut Service">
+    </div>
+</div>
+
+        
+        <!-- Beard Trim Service Page -->
+        <div class="service-page">
+            <div class="service-content">
+                <h3>Expert Beard Trim</h3>
+                <p>Transform your facial hair with our expert beard trimming and styling service. Whether you're maintaining an existing style or crafting a new look, our barbers will shape your beard to complement your face structure.</p>
+                <p>Includes hot towel treatment, precision trimming, and finishing with beard oils and balms for a polished appearance.</p>
+                <div class="service-buttons">
+                    <button class="service-btn book-btn" onclick="window.location.href='booking.html'">Book Now</button>
+                    <button class="service-btn explore-btn" onclick="showServiceDetails('beard')">Explore More</button>
+                </div>
+            </div>
+            <div class="service-image">
+                <img src="beard.webp" alt="Expert Beard Trim Service">
+            </div>
+        </div>
+        
+        <!-- Hair Styling Service Page -->
+        <div class="service-page">
+            <div class="service-content">
+                <h3>Premium Hair Styling</h3>
+                <p>Elevate your look with our professional styling services using high-quality products. Our stylists are trained in the latest techniques to create everything from classic to contemporary styles.</p>
+                <p>Perfect for special occasions or when you want to refresh your everyday look with expert styling that lasts.</p>
+                <div class="service-buttons">
+                    <button class="service-btn book-btn" onclick="window.location.href='booking.html'">Book Now</button>
+                    <button class="service-btn explore-btn" onclick="showServiceDetails('styling')">Explore More</button>
+                </div>
+            </div>
+            <div class="service-image">
+                <img src="hair styling.webp" alt="Premium Hair Styling Service">
+            </div>
+        </div>
+        
+        <!-- Face Treatment Service Page -->
+        <div class="service-page">
+            <div class="service-content">
+                <h3>Luxury Face Treatment</h3>
+                <p>Indulge in our rejuvenating facial treatments designed specifically for men's skin. Our treatments cleanse, exfoliate, and hydrate your skin while providing a relaxing experience.</p>
+                <p>Includes deep cleansing, exfoliation, mask application, and moisturizing with premium skincare products to leave your skin refreshed and revitalized.</p>
+                <div class="service-buttons">
+                    <button class="service-btn book-btn" onclick="window.location.href='booking.html'">Book Now</button>
+                    <button class="service-btn explore-btn" onclick="showServiceDetails('treatment')">Explore More</button>
+                </div>
+            </div>
+            <div class="service-image">
+                <img src="face treatment.webp" alt="Luxury Face Treatment Service">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hairstyles Section -->
+<section id="hairstyles" class="section">
+    <h2 class="section-title">Recommended Hairstyles</h2>
+    <div class="hairstyles-grid">
+        <!-- Hairstyles will be dynamically populated here -->
+    </div>
+</section>
+
+<!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> xxxxxxxx23</p>
+                <p><i class="fas fa-envelope"></i> mensgrooming@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i>......</p>
+            </div>
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>MGS Connect is a premium platform that connects users with top grooming, fashion, and wellness professionals. We ensure a seamless experience by making it easy to find and book expert services with convenience and quality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.x.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mens Grooming. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="user-dashboard.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Check authentication
+            if (!await checkAuth()) return;
+
+            // Get user details
+            const user = getUser();
+            const welcomeMessage = document.querySelector('.hero-content h1');
+            if (welcomeMessage) {
+                welcomeMessage.textContent = `Welcome, ${user.name || 'User'}!`;
+            }
+
+            // Fetch and display hairstyles
+            try {
+                const response = await fetch('http://localhost:5000/api/hairstyles');
+                const data = await response.json();
+
+                if (response.ok) {
+                    const hairstylesGrid = document.querySelector('.hairstyles-grid');
+                    if (hairstylesGrid) {
+                        data.data.forEach(hairstyle => {
+                            const card = document.createElement('div');
+                            card.className = 'hairstyle-card';
+                            card.innerHTML = `
+                                <img src="${hairstyle.image}" alt="${hairstyle.name}" class="hairstyle-image">
+                                <div class="hairstyle-info">
+                                    <h3 class="hairstyle-name">${hairstyle.name}</h3>
+                                    <p class="hairstyle-description">${hairstyle.description}</p>
+                                </div>
+                            `;
+                            hairstylesGrid.appendChild(card);
+                        });
+                    }
+                } else {
+                    console.error('Failed to fetch hairstyles:', data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching hairstyles:', error);
+            }
+        });
+    </script>
+</body>
+</html>

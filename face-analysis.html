@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Shape Analysis - Modern Men's Grooming</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="face-analysis.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="user-dashboard.html">
+                <img src="logo2.webp" alt="GentsCut" style="height: 70px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="face-analysis.html" class="active">Face Analysis</a></li>
+            <li><a href="hairstyles.html">Hairstyles</a></li>
+            <li><a href="booking.html" class="book-now">Book Now</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="sub-hero analysis-hero">
+        <div class="hero-content">
+            <h1>Face Shape Analysis</h1>
+            <p>Discover your face shape and get personalized hairstyle recommendations</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Introduction Section -->
+        <section id="analysis-intro" class="section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2>Find Your Perfect Hairstyle</h2>
+                    <p class="lead">Our advanced face shape analysis tool helps you identify your face shape and recommends the most flattering hairstyles for your features.</p>
+                </div>
+                
+                <!-- How It Works -->
+                <div class="process-steps">
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-upload"></i>
+                            <span class="step-number">1</span>
+                        </div>
+                        <h3>Upload Your Photo</h3>
+                        <p>Take a front-facing photo with your hair pulled back and upload it to our secure system.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-magic"></i>
+                            <span class="step-number">2</span>
+                        </div>
+                        <h3>Get Your Analysis</h3>
+                        <p>Our algorithm will analyze your facial proportions to determine your face shape.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-icon">
+                            <i class="fas fa-cut"></i>
+                            <span class="step-number">3</span>
+                        </div>
+                        <h3>View Recommendations</h3>
+                        <p>Browse hairstyles specifically recommended for your face shape.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Analysis Tool Section -->
+        <section id="analysis-tool" class="section bg-light">
+            <div class="container">
+                <div class="card analysis-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-camera"></i> Face Shape Analyzer</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="upload-container">
+                                    <input type="file" id="face-upload" accept="image/*" hidden>
+                                    <label for="face-upload" class="upload-area" id="upload-label">
+                                        <div class="upload-icon">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                        </div>
+                                        <div class="upload-text">
+                                            <span class="primary-text">Upload Your Photo</span>
+                                            <span class="secondary-text">Click or drag and drop your image here</span>
+                                        </div>
+                                    </label>
+                                    <div id="preview-container" class="image-preview"></div>
+                                    <div class="upload-tips">
+                                        <h4><i class="fas fa-lightbulb"></i> Tips for Best Results:</h4>
+                                        <ul>
+                                            <li>Use a front-facing photo</li>
+                                            <li>Pull your hair back to reveal your hairline</li>
+                                            <li>Ensure good lighting</li>
+                                            <li>Maintain a neutral expression</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="result-container">
+                                    <div id="loading-indicator" class="hidden">
+                                        <div class="spinner"></div>
+                                        <p>Analyzing your face shape...</p>
+                                    </div>
+                                    <div id="face-shape-result" class="analysis-result">
+                                        <div class="placeholder-text">
+                                            <i class="fas fa-info-circle"></i>
+                                            <p>Your analysis results will appear here after uploading a photo</p>
+                                        </div>
+                                    </div>
+                                    <div class="action-buttons">
+                                        <button id="analyze-btn" class="btn primary-btn" disabled>
+                                            <i class="fas fa-search"></i> Analyze Face Shape
+                                        </button>
+                                        <button id="view-styles" class="btn secondary-btn hidden">
+                                            <i class="fas fa-cut"></i> View Recommended Styles
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="privacy-note">
+                            <i class="fas fa-shield-alt"></i>
+                            <p>Your privacy is important to us. Uploaded photos are processed securely and are not stored on our servers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> xxxxxxxxx23</p>
+                <p><i class="fas fa-envelope"></i> mensgrooming@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> ............</p>
+            </div>
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>MGS Connect is a premium platform that connects users with top grooming, fashion, and wellness professionals. We ensure a seamless experience by making it easy to find and book expert services with convenience and quality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.x.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mens Grooming. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="face-analysis.js"></script>
+    
+</body>
+</html>

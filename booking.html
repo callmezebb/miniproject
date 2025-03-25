@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - GentsCut</title>
+    <link rel="stylesheet" href="booking.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="GentsCut" class="logo-img">
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#" class="active">Book Appointment</a>
+            <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="booking-container">
+        <div class="booking-header">
+            <h1>Book Your Appointment</h1>
+            <p>Select your preferred salon and service</p>
+        </div>
+
+        <div class="booking-steps">
+            <!-- Step 1: Select Salon -->
+            <div class="booking-step" id="step1">
+                <h2>1. Select Salon</h2>
+                <div class="salons-grid" id="salonsGrid">
+                    <!-- Salons will be populated here -->
+                </div>
+            </div>
+
+            <!-- Step 2: Select Service -->
+            <div class="booking-step hidden" id="step2">
+                <h2>2. Select Service</h2>
+                <div class="selected-salon-info" id="selectedSalonInfo"></div>
+                <div class="services-grid" id="servicesGrid">
+                    <!-- Services will be populated here -->
+                </div>
+            </div>
+
+            <!-- Step 3: Select Date & Time -->
+            <div class="booking-step hidden" id="step3">
+                <h2>3. Select Date & Time</h2>
+                <div class="datetime-selection">
+                    <div class="date-picker">
+                        <h3>Select Date</h3>
+                        <input type="date" id="appointmentDate" min="">
+                    </div>
+                    <div class="time-slots">
+                        <h3>Available Time Slots</h3>
+                        <div class="time-slots-grid" id="timeSlots">
+                            <!-- Time slots will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Confirm Details -->
+            <div class="booking-step hidden" id="step4">
+                <h2>4. Confirm Booking</h2>
+                <div class="booking-summary">
+                    <h3>Booking Summary</h3>
+                    <div class="summary-details" id="bookingSummary">
+                        <!-- Summary will be populated here -->
+                    </div>
+                    <div class="customer-details">
+                        <h3>Your Details</h3>
+                        <div class="form-group">
+                            <label for="customerName">Name</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">Phone</label>
+                            <input type="tel" id="customerPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerNotes">Special Notes (Optional)</label>
+                            <textarea id="customerNotes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-navigation">
+            <button class="nav-btn back-btn" id="backBtn" onclick="previousStep()">Back</button>
+            <button class="nav-btn next-btn" id="nextBtn" onclick="nextStep()">Next</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h2>Booking Confirmed!</h2>
+            <p>Your appointment has been successfully booked.</p>
+            <div class="confirmation-details" id="confirmationDetails">
+                <!-- Confirmation details will be populated here -->
+            </div>
+            <button class="close-btn" onclick="closeConfirmation()">Close</button>
+        </div>
+    </div>
+
+    <script src="booking.js"></script>
+    
+</body>
+</html>

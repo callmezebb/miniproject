@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trending Hairstyles - Modern Men's Grooming</title>
+    <link rel="stylesheet" href="hairstyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="user-dashboard.html">
+            <img src="DALL·E 2025-02-27 20.16.53 - A round, stylish logo for a men's grooming website. The design features a sleek, minimalist emblem with a masculine aesthetic. The circular logo inclu.webp" alt="GentsCut" style="height: 70px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#face-analysis">Face Analysis</a></li>
+            <li><a href="hairstyles.html" class="active">Hairstyles</a></li>
+            <li><a href="index.html#booking" class="book-now">Book Now</a></li>
+            <li><a onclick="logout()">Logout</a></li>
+
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Hairstyles Hero Section -->
+    <section class="sub-hero">
+        <div class="hero-content">
+            <h1>Trending Hairstyles</h1>
+            <p>Discover the perfect hairstyle for your face shape and personal style</p>
+        </div>
+    </section>
+
+    <!-- Hairstyles Section -->
+    <section id="hairstyles" class="section">
+        <h2 class="section-title">Find Your Perfect Style</h2>
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Styles</button>
+            <button class="filter-btn" data-filter="oval">Oval Face</button>
+            <button class="filter-btn" data-filter="round">Round Face</button>
+            <button class="filter-btn" data-filter="square">Square Face</button>
+        </div>
+        <div class="hairstyles-grid" id="hairstyles-container">
+            <!-- Oval Face Hairstyles -->
+            <div class="hairstyle-card" data-type="round oval">
+                <img src="quiff.webp" alt="Textured Quiff">
+                <div class="hairstyle-info">
+                    <h3>Textured Quiff</h3>
+                    <p>Perfect for oval faces, this modern style adds height and texture.</p>
+                    <span class="face-type">Oval and Round Face</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Textured Quiff'">Book This Style</button>
+
+                </div>
+            </div>
+            
+            <div class="hairstyle-card" data-type="oval">
+                <img src="side part.webp" alt="Classic Side Part">
+                <div class="hairstyle-info">
+                    <h3>Classic Side Part</h3>
+                    <p>A timeless style that works exceptionally well with oval face shapes.</p>
+                    <span class="face-type">Oval Face</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Classic Side Part'">Book This Style</button>
+
+                </div>
+            </div>
+            
+            <!-- Round Face Hairstyles -->
+            <div class="hairstyle-card" data-type="round">
+                <img src="pompadour.webp" alt="Pompadour">
+                <div class="hairstyle-info">
+                    <h3>Modern Pompadour</h3>
+                    <p>Adds height and structure, perfect for balancing round face shapes.</p>
+                    <span class="face-type">Round Face</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Pompadour'">Book This Style</button>
+
+                </div>
+            </div>
+            
+            <div class="hairstyle-card" data-type="square">
+                <img src="textured fringe.webp" alt="Angular Fringe">
+                <div class="hairstyle-info">
+                    <h3>Angular Fringe</h3>
+                    <p>Creates angles that complement and balance round facial features.</p>
+                    <span class="face-type">Square Face</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Angular Fringe'">Book This Style</button>
+
+                </div>
+            </div>
+            
+            <!-- Square Face Hairstyles -->
+            <div class="hairstyle-card" data-type="oval square">
+                <img src="textured crop.webp" alt="Textured Crop">
+                <div class="hairstyle-info">
+                    <h3>Textured Crop</h3>
+                    <p>Softens strong jawlines with texture and movement on top.</p>
+                    <span class="face-type">Square and Oval Face</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Textured Crop'">Book This Style</button>
+                </div>
+            </div>
+            
+            <div class="hairstyle-card" data-type="round oval">
+                <img src="undercut.webp" alt="Slicked Back">
+                <div class="hairstyle-info">
+                    <h3>Slicked Back Undercut</h3>
+                    <p>Complements square faces by emphasizing strong features.</p>
+                    <span class="face-type">Round and Oval Face</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Slicked Back Undercut'">Book This Style</button>
+                </div>
+            </div>
+            
+            <!-- Universal Hairstyles -->
+            <div class="hairstyle-card" data-type="square">
+                <img src="buzz.webp" alt="Buzz Cut">
+                <div class="hairstyle-info">
+                    <h3>Modern Buzz Cut</h3>
+                    <p>A versatile, low-maintenance style that works for most face shapes.</p>
+                    <span class="face-type">Square Face</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Buzz Cut'">Book This Style</button>
+                </div>
+            </div>
+            
+            <div class="hairstyle-card" data-type="oval round square">
+                <img src="mid fade.webp" alt="Mid Fade">
+                <div class="hairstyle-info">
+                    <h3>Mid Fade</h3>
+                    <p>Versatile style with natural texture that suits most face shapes.</p>
+                    <span class="face-type">All Face Types</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Mid Fade'">Book This Style</button>
+                </div>
+            </div>
+            
+            <div class="hairstyle-card" data-type="oval round square">
+                <img src="low fade.webp" alt="Low Fade">
+                <div class="hairstyle-info">
+                    <h3>Low Fade</h3>
+                    <p>Versatile style with natural texture that suits most face shapes.</p>
+                    <span class="face-type">All Face Types</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Low Fade'">Book This Style</button>
+                </div>
+            </div>
+            
+            <div class="hairstyle-card" data-type="round">
+                <img src="faux hawk.webp" alt="Faux Hawk">
+                <div class="hairstyle-info">
+                    <h3>Faux Hawk</h3>
+                    <p>Versatile style with natural texture that suits most face shapes.</p>
+                    <span class="face-type">Round Face</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Faux Hawk'">Book This Style</button>
+                </div>
+            </div>
+            
+            <div class="hairstyle-card" data-type="round oval square">
+                <img src="hybrid.webp" alt="Modern Hybrid">
+                <div class="hairstyle-info">
+                    <h3>Modern Hybrid</h3>
+                    <p>Versatile style with natural texture that suits most face shapes.</p>
+                    <span class="face-type">All Face Types</span>
+                    <button class="style-btn" onclick="window.location.href='booking.html?service=haircut&style=Modern Hybrid'">Book This Style</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Services Button -->
+    <div class="back-to-services">
+        <a href="index.html#services" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Services
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> xxxxxxxx23</p>
+                <p><i class="fas fa-envelope"></i> mensgrooming@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> ......</p>
+            </div>
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>MGS Connect is a premium platform that connects users with top grooming, fashion, and wellness professionals. We ensure a seamless experience by making it easy to find and book expert services with convenience and quality.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.x.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Mens Grooming. All rights reserved.</p>
+        </div>
+    </footer>
+
+    
+    <script src="hairstyles.js"></script>
+    <script>
+        function logout() {
+        localStorage.removeItem('userType');
+        localStorage.removeItem('userEmail');
+        window.location.href = 'index.html';
+    }
+    </script>
+</body>
+</html>
