@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 
+
 // Load environment variables
 dotenv.config({ path: path.resolve(__dirname, '../config.env') }); // Ensure correct path to .env file
 
@@ -21,41 +22,65 @@ if (!process.env.JWT_SECRET) {
 const app = express();
 
 // Middleware
-app.use(cors());
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // Update this to match your frontend URL
+    origin: ['http://127.0.0.1:5500', 'http://localhost:5500'], // Update with your frontend URLs
     credentials: true
 }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Serve static files from the parent directory
+app.use(express.static(path.join(__dirname, '..')));
 
 // Import routes
 const authRoutes = require('./routes/auth');
 const salonRoutes = require('./routes/salons');
 const bookingRoutes = require('./routes/bookings');
 const hairstyleRoutes = require('./routes/hairstyles'); // Import hairstyles route
+const serviceRoutes = require('./routes/services');
 
 // Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/salons', salonRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/hairstyles', hairstyleRoutes); // Mount hairstyles route
+app.use('/api/salons', serviceRoutes);
 
 // Error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({
         success: false,
-        message: 'Server Error'
+        message: 'Server Error',
+        error: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
 });
 
-// Connect to MongoDB with error handling
+// Connect to MongoDB with improved error handling and options
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI); // Removed deprecated options
-        console.log('MongoDB Connected');
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            serverSelectionTimeoutMS: 5000, // Timeout after 5 seconds
+            heartbeatFrequencyMS: 10000, // Heartbeat frequency
+        });
+        
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+        
+        // Add event listeners for connection issues
+        mongoose.connection.on('error', err => {
+            console.error(`MongoDB connection error: ${err}`);
+        });
+        
+        mongoose.connection.on('disconnected', () => {
+            console.log('MongoDB disconnected. Attempting to reconnect...');
+        });
+        
+        mongoose.connection.on('reconnected', () => {
+            console.log('MongoDB reconnected');
+        });
+        
     } catch (error) {
-        console.error('MongoDB Connection Error:', error.message);
+        console.error(`MongoDB Connection Error: ${error.message}`);
         process.exit(1);
     }
 };
@@ -71,5 +96,14 @@ connectDB().then(() => {
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
     console.error(`Unhandled Rejection Error: ${err.message}`);
+    // Allow the process to continue running despite unhandled rejections in production
+    if (process.env.NODE_ENV === 'development') {
+        process.exit(1);
+    }
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+    console.error(`Uncaught Exception: ${err.message}`);
     process.exit(1);
 });

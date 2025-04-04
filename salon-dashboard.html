@@ -3,103 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salon Dashboard - GentsCut</title>
+    <title>Salon Dashboard</title>
     <link rel="stylesheet" href="salon-dashboard.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="GentsCut" class="logo-img">
-            <span class="salon-name" id="navSalonName">Salon Name</span>
+    <header>
+        <h1>Salon Dashboard</h1>
+        <div class="user-info">
+            <span id="salonName">Your Salon</span>
+            <button id="logoutBtn">Logout</button>
         </div>
-        <button class="logout-btn" onclick="handleLogout()">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-    </nav>
-
+    </header>
+    
     <div class="dashboard-container">
-        <div class="dashboard-header">
-            <h1>Dashboard</h1>
-            <div class="date-display" id="currentDate"></div>
-        </div>
-
-        <div class="stats-container">
-            <div class="stat-card">
-                <i class="fas fa-calendar-day"></i>
-                <div class="stat-info">
-                    <span class="stat-value" id="todayAppointments">0</span>
-                    <span class="stat-label">Today's Appointments</span>
+        <aside class="sidebar">
+            <div class="sidebar-profile">
+                <h2 id="sidebarSalonName">Your Salon</h2>
+                <p id="sidebarOwnerName">Owner Name</p>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active" data-tab="overview">Overview</a></li>
+                <li><a href="#" data-tab="bookings">Bookings</a></li>
+                <li><a href="#" data-tab="services">Services</a></li>
+                <li><a href="#" data-tab="hours">Business Hours</a></li>
+                <li><a href="#" data-tab="settings">Settings</a></li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+            <!-- Overview Tab -->
+            <section class="tab-content active" id="overview-tab">
+                <div class="content-section">
+                    <h2>Salon Information</h2>
+                    <div class="salon-info-grid">
+                        <div class="info-card">
+                            <strong>Phone</strong>
+                            <span id="overviewPhone">-</span>
+                        </div>
+                        <div class="info-card">
+                            <strong>Location</strong>
+                            <span id="overviewLocation">-</span>
+                        </div>
+                        <div class="info-card">
+                            <strong>Email</strong>
+                            <span id="overviewEmail">-</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-calendar-week"></i>
-                <div class="stat-info">
-                    <span class="stat-value" id="weekAppointments">0</span>
-                    <span class="stat-label">This Week</span>
+                
+                <div class="content-section">
+                    <h2>Recent Bookings</h2>
+                    <div id="recentBookingsContainer">
+                        <p class="loading">Loading recent bookings...</p>
+                    </div>
                 </div>
-            </div>
-            <div class="stat-card">
-                <i class="fas fa-clock"></i>
-                <div class="stat-info">
-                    <span class="stat-value" id="nextAppointment">No upcoming</span>
-                    <span class="stat-label">Next Appointment</span>
+            </section>
+            
+            <!-- Bookings Tab -->
+            <section class="tab-content" id="bookings-tab">
+                <div class="content-section">
+                    <h2>All Bookings</h2>
+                    <div class="bookings-container">
+                        <!-- Loading spinner -->
+                        <div class="loading-spinner" style="display: none;">
+                            <div class="spinner"></div>
+                            <p>Loading bookings...</p>
+                        </div>
+                        
+                        <!-- Bookings grid -->
+                        <div id="allBookingsContainer" class="bookings-grid">
+                            <!-- Bookings will be dynamically inserted here -->
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="content-grid">
-            <div class="salon-info-card">
-                <h2>Salon Information</h2>
-                <div class="info-content" id="salonInfo">
-                    <p><i class="fas fa-store"></i> <span id="salonNameDisplay"></span></p>
-                    <p><i class="fas fa-phone"></i> <span id="salonPhone"></span></p>
-                    <p><i class="fas fa-location-dot"></i> <span id="salonAddress"></span></p>
-                    <p><i class="fas fa-envelope"></i> <span id="salonEmail"></span></p>
+            </section>
+            
+            <!-- Services Tab -->
+            <section class="tab-content" id="services-tab">
+                <div class="content-section">
+                    <h2>Your Services</h2>
+                    <div id="servicesContainer">
+                        <p class="loading">Loading services...</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="hours-card">
-                <h2>Operating Hours</h2>
-                <div class="hours-content" id="operatingHours">
-                    <!-- Hours will be populated by JavaScript -->
+            </section>
+            
+            <!-- Business Hours Tab -->
+            <section class="tab-content" id="hours-tab">
+                <div class="content-section">
+                    <h2>Business Hours</h2>
+                    <div class="hours-grid" id="hoursContainer">
+                        <p class="loading">Loading business hours...</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="services-card">
-                <h2>Services</h2>
-                <div class="services-content" id="servicesList">
-                    <!-- Services will be populated by JavaScript -->
+            </section>
+            
+            <!-- Settings Tab -->
+            <section class="tab-content" id="settings-tab">
+                <div class="content-section">
+                    <h2>Account Settings</h2>
+                    <p>This section is under development. Soon you'll be able to update your salon profile here.</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="appointments-section">
-            <div class="appointments-header">
-                <h2>Appointments</h2>
-                <div class="appointment-filters">
-                    <select id="dateFilter" class="filter-select">
-                        <option value="today">Today</option>
-                        <option value="tomorrow">Tomorrow</option>
-                        <option value="week">This Week</option>
-                        <option value="all">All Upcoming</option>
-                    </select>
-                    <select id="statusFilter" class="filter-select">
-                        <option value="all">All Status</option>
-                        <option value="upcoming">Upcoming</option>
-                        <option value="completed">Completed</option>
-                        <option value="cancelled">Cancelled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="appointments-list" id="appointmentsList">
-                <!-- Appointments will be populated by JavaScript -->
-            </div>
-        </div>
+            </section>
+        </main>
     </div>
-
+    
     <script src="salon-dashboard.js"></script>
-    <script src="js/auth.js"></script>
 </body>
 </html>

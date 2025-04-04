@@ -25,36 +25,33 @@ const UserSchema = new mongoose.Schema({
     },
     userType: {
         type: String,
-        enum: ['user', 'salon'],
-        required: true
+        enum: ['user', 'salon', 'admin'],
+        default: 'user'
     },
-    // Salon-specific fields
     phone: {
         type: String,
-        match: [/^\d{10}$/, 'Please add a valid phone number'],
-        required: function () {
-            return this.userType === 'salon';
-        }
+        match: [/^\d{10}$/, 'Please add a valid phone number']
     },
-    location: {
+    profilePicture: {
         type: String,
-        required: function () {
-            return this.userType === 'salon';
-        }
+        default: 'default-profile.jpg'
     },
-    workingHours: {
-        days: [String],
-        openTime: String,
-        closeTime: String
-    },
-    services: [{
-        name: String,
-        price: Number,
-        duration: Number
+    preferredHairstyles: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Hairstyle'
     }],
+    bookings: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Booking'
+    }],
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
     createdAt: {
         type: Date,
         default: Date.now
+    },
+    lastLogin: {
+        type: Date
     }
 });
 

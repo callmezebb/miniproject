@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/face-api.js"></script>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">
             <a href="user-dashboard.html">
-            <img src="logo2.webp" alt="GentsCut" style="height: 70px;">
+            <img src="images/logo2.webp" alt="GentsCut" style="height: 70px;">
             </a>
         </div>
         <ul class="nav-links">
@@ -66,7 +67,7 @@
         </div>
     </div>
     <div class="service-image">
-        <img src="hair cutting.webp" alt="Professional Haircut Service">
+        <img src="images/hair cutting.webp" alt="Professional Haircut Service">
     </div>
 </div>
 
@@ -79,11 +80,12 @@
                 <p>Includes hot towel treatment, precision trimming, and finishing with beard oils and balms for a polished appearance.</p>
                 <div class="service-buttons">
                     <button class="service-btn book-btn" onclick="window.location.href='booking.html'">Book Now</button>
-                    <button class="service-btn explore-btn" onclick="showServiceDetails('beard')">Explore More</button>
+                    <!-- In the beard trim service section -->
+                    <button class="service-btn explore-btn" onclick="window.location.href='beard-styles.html'">Explore More</button>
                 </div>
             </div>
             <div class="service-image">
-                <img src="beard.webp" alt="Expert Beard Trim Service">
+                <img src="images/beard.webp" alt="Expert Beard Trim Service">
             </div>
         </div>
         
@@ -95,11 +97,10 @@
                 <p>Perfect for special occasions or when you want to refresh your everyday look with expert styling that lasts.</p>
                 <div class="service-buttons">
                     <button class="service-btn book-btn" onclick="window.location.href='booking.html'">Book Now</button>
-                    <button class="service-btn explore-btn" onclick="showServiceDetails('styling')">Explore More</button>
-                </div>
+                    <button class="service-btn explore-btn" onclick="window.location.href='premium-hair-services.html'">Explore More</button>                </div>
             </div>
             <div class="service-image">
-                <img src="hair styling.webp" alt="Premium Hair Styling Service">
+                <img src="images/hair styling.webp" alt="Premium Hair Styling Service">
             </div>
         </div>
         
@@ -111,23 +112,16 @@
                 <p>Includes deep cleansing, exfoliation, mask application, and moisturizing with premium skincare products to leave your skin refreshed and revitalized.</p>
                 <div class="service-buttons">
                     <button class="service-btn book-btn" onclick="window.location.href='booking.html'">Book Now</button>
-                    <button class="service-btn explore-btn" onclick="showServiceDetails('treatment')">Explore More</button>
-                </div>
+                    <button class="service-btn explore-btn" onclick="window.location.href='face-treatments.html'">Explore More</button>                </div>
             </div>
             <div class="service-image">
-                <img src="face treatment.webp" alt="Luxury Face Treatment Service">
+                <img src="images/face treatment.webp" alt="Luxury Face Treatment Service">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Hairstyles Section -->
-<section id="hairstyles" class="section">
-    <h2 class="section-title">Recommended Hairstyles</h2>
-    <div class="hairstyles-grid">
-        <!-- Hairstyles will be dynamically populated here -->
-    </div>
-</section>
+
 
 <!-- Footer -->
     <footer>
@@ -158,7 +152,7 @@
     </footer>
 
     <script src="user-dashboard.js"></script>
-    <script src="js/auth.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
             // Check authentication

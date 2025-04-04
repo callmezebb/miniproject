@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Face Shape Analysis - Modern Men's Grooming</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="face-analysis.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -14,7 +14,7 @@
     <nav class="navbar">
         <div class="logo">
             <a href="user-dashboard.html">
-                <img src="logo2.webp" alt="GentsCut" style="height: 70px;">
+                <img src="images/DALL·E 2025-02-27 20.16.53 - A round, stylish logo for a men's grooming website. The design features a sleek, minimalist emblem with a masculine aesthetic. The circular logo inclu.webp" alt="GentsCut" style="height: 70px;">
             </a>
         </div>
         <ul class="nav-links">
@@ -22,8 +22,8 @@
             <li><a href="index.html#services">Services</a></li>
             <li><a href="face-analysis.html" class="active">Face Analysis</a></li>
             <li><a href="hairstyles.html">Hairstyles</a></li>
-            <li><a href="booking.html" class="book-now">Book Now</a></li>
-            <li><a href="#" onclick="logout()">Logout</a></li>
+            <li><a href="index.html#booking" class="book-now">Book Now</a></li>
+            <li><a onclick="logout()">Logout</a></li>
         </ul>
         <div class="burger">
             <div class="line1"></div>
@@ -32,131 +32,104 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="sub-hero analysis-hero">
+    <!-- Face Analysis Hero Section -->
+    <section class="sub-hero">
         <div class="hero-content">
             <h1>Face Shape Analysis</h1>
             <p>Discover your face shape and get personalized hairstyle recommendations</p>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Introduction Section -->
-        <section id="analysis-intro" class="section">
-            <div class="container">
-                <div class="section-header text-center">
-                    <h2>Find Your Perfect Hairstyle</h2>
-                    <p class="lead">Our advanced face shape analysis tool helps you identify your face shape and recommends the most flattering hairstyles for your features.</p>
+    <!-- Face Analysis Section -->
+    <section id="face-analysis" class="section">
+        <div class="face-analysis-container">
+            <div class="analysis-header">
+                <h2>Analyze Your Face Shape</h2>
+                <p>Upload a front-facing photo to find the perfect hairstyle for your face shape</p>
+            </div>
+
+            <div class="upload-section">
+                <div class="upload-box" id="uploadBox">
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click or drag photo here</p>
+                        <span class="upload-hint">
+                            For best results:
+                            <ul>
+                                <li>Use a well-lit, front-facing photo</li>
+                                <li>Ensure your face is clearly visible</li>
+                                <li>Pull hair away from face</li>
+                                <li>Maintain neutral expression</li>
+                            </ul>
+                        </span>
+                    </div>
                 </div>
                 
-                <!-- How It Works -->
-                <div class="process-steps">
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <i class="fas fa-upload"></i>
-                            <span class="step-number">1</span>
-                        </div>
-                        <h3>Upload Your Photo</h3>
-                        <p>Take a front-facing photo with your hair pulled back and upload it to our secure system.</p>
-                    </div>
-                    
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <i class="fas fa-magic"></i>
-                            <span class="step-number">2</span>
-                        </div>
-                        <h3>Get Your Analysis</h3>
-                        <p>Our algorithm will analyze your facial proportions to determine your face shape.</p>
-                    </div>
-                    
-                    <div class="step-card">
-                        <div class="step-icon">
-                            <i class="fas fa-cut"></i>
-                            <span class="step-number">3</span>
-                        </div>
-                        <h3>View Recommendations</h3>
-                        <p>Browse hairstyles specifically recommended for your face shape.</p>
-                    </div>
+                <div class="preview-container" id="previewContainer" style="display: none;">
+                    <img id="imagePreview" alt="Face preview">
+                    <button id="retakeBtn" class="secondary-button">
+                        <i class="fas fa-redo"></i> Retake Photo
+                    </button>
                 </div>
             </div>
-        </section>
-        
-        <!-- Analysis Tool Section -->
-        <section id="analysis-tool" class="section bg-light">
-            <div class="container">
-                <div class="card analysis-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-camera"></i> Face Shape Analyzer</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="upload-container">
-                                    <input type="file" id="face-upload" accept="image/*" hidden>
-                                    <label for="face-upload" class="upload-area" id="upload-label">
-                                        <div class="upload-icon">
-                                            <i class="fas fa-cloud-upload-alt"></i>
-                                        </div>
-                                        <div class="upload-text">
-                                            <span class="primary-text">Upload Your Photo</span>
-                                            <span class="secondary-text">Click or drag and drop your image here</span>
-                                        </div>
-                                    </label>
-                                    <div id="preview-container" class="image-preview"></div>
-                                    <div class="upload-tips">
-                                        <h4><i class="fas fa-lightbulb"></i> Tips for Best Results:</h4>
-                                        <ul>
-                                            <li>Use a front-facing photo</li>
-                                            <li>Pull your hair back to reveal your hairline</li>
-                                            <li>Ensure good lighting</li>
-                                            <li>Maintain a neutral expression</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="result-container">
-                                    <div id="loading-indicator" class="hidden">
-                                        <div class="spinner"></div>
-                                        <p>Analyzing your face shape...</p>
-                                    </div>
-                                    <div id="face-shape-result" class="analysis-result">
-                                        <div class="placeholder-text">
-                                            <i class="fas fa-info-circle"></i>
-                                            <p>Your analysis results will appear here after uploading a photo</p>
-                                        </div>
-                                    </div>
-                                    <div class="action-buttons">
-                                        <button id="analyze-btn" class="btn primary-btn" disabled>
-                                            <i class="fas fa-search"></i> Analyze Face Shape
-                                        </button>
-                                        <button id="view-styles" class="btn secondary-btn hidden">
-                                            <i class="fas fa-cut"></i> View Recommended Styles
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="privacy-note">
-                            <i class="fas fa-shield-alt"></i>
-                            <p>Your privacy is important to us. Uploaded photos are processed securely and are not stored on our servers.</p>
-                        </div>
-                    </div>
+
+            <div class="analysis-controls">
+                <button id="analyzeBtn" class="primary-button" disabled>
+                    <i class="fas fa-search"></i> Analyze Face Shape
+                </button>
+            </div>
+
+            <div id="resultSection" class="result-section" style="display: none;">
+                <div class="result-content">
+                    <h3>Your Face Shape:</h3>
+                    <div id="shapeResult" class="shape-result"></div>
+                    <div class="shape-description" id="shapeDescription"></div>
+                    <button id="viewStylesBtn" class="primary-button">
+                        <i class="fas fa-cut"></i> View Recommended Hairstyles
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+
+    <!-- Face Shapes Guide Section -->
+    <section class="face-shapes-guide section">
+        <h2 class="section-title">Understanding Face Shapes</h2>
+        <div class="shapes-grid">
+            <div class="shape-card">
+                <div class="shape-icon"><i class="fas fa-user"></i></div>
+                <h3>Oval</h3>
+                <p>Length about 1.5 times width, with balanced proportions and gentle curves.</p>
+            </div>
+            <div class="shape-card">
+                <div class="shape-icon"><i class="fas fa-user"></i></div>
+                <h3>Round</h3>
+                <p>Similar length and width with soft curves and full cheeks.</p>
+            </div>
+            <div class="shape-card">
+                <div class="shape-icon"><i class="fas fa-user"></i></div>
+                <h3>Square</h3>
+                <p>Strong angular features with similar measurements at forehead and jaw.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Services Button -->
+    <div class="back-to-services">
+        <a href="index.html#services" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Services
+        </a>
+    </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Contact Us</h4>
-                <p><i class="fas fa-phone"></i> xxxxxxxxx23</p>
+                <p><i class="fas fa-phone"></i> xxxxxxxx23</p>
                 <p><i class="fas fa-envelope"></i> mensgrooming@gmail.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> ............</p>
+                <p><i class="fas fa-map-marker-alt"></i> ......</p>
             </div>
             <div class="footer-section">
                 <h4>About Us</h4>
@@ -177,8 +150,19 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Scripts -->
     <script src="face-analysis.js"></script>
-    
+    <script>
+       
+
+        // Mobile menu toggle
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        
+        burger.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+            burger.classList.toggle('toggle');
+        });
+    </script>
 </body>
-</html>
+</html> 

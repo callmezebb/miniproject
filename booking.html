@@ -3,110 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Appointment - GentsCut</title>
+    <title>Book Appointment - Modern Men's Grooming</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="booking.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">
-            <img src="logo.png" alt="GentsCut" class="logo-img">
+            <a href="user-dashboard.html">
+                <img src="images/logo2.webp" alt="GentsCut" style="height: 70px;">
+            </a>
         </div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="#" class="active">Book Appointment</a>
-            <button class="logout-btn" onclick="handleLogout()">Logout</button>
+        <ul class="nav-links">
+            <li><a href="user-dashboard.html">Home</a></li>
+            <li><a href="user-dashboard.html">Services</a></li>
+            <li><a href="face-analysis.html">Face Analysis</a></li>
+            <li><a href="hairstyles.html">Hairstyles</a></li>
+            <li><a href="my-appointments.html">My Appointments</a></li>
+            <li><a href="booking.html" class="active">Book Now</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
         </div>
     </nav>
 
-    <div class="booking-container">
-        <div class="booking-header">
+    <!-- Hero Section -->
+    <section class="booking-hero">
+        <div class="booking-hero-content">
             <h1>Book Your Appointment</h1>
-            <p>Select your preferred salon and service</p>
+            <p>Experience top-notch grooming services tailored just for you</p>
         </div>
+    </section>
 
-        <div class="booking-steps">
-            <!-- Step 1: Select Salon -->
-            <div class="booking-step" id="step1">
-                <h2>1. Select Salon</h2>
-                <div class="salons-grid" id="salonsGrid">
-                    <!-- Salons will be populated here -->
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <div class="booking-container">
+            <!-- Progress Steps -->
+            <div class="booking-progress">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Select Salon</div>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Choose Time</div>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Details</div>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Confirm</div>
                 </div>
             </div>
 
-            <!-- Step 2: Select Service -->
-            <div class="booking-step hidden" id="step2">
-                <h2>2. Select Service</h2>
-                <div class="selected-salon-info" id="selectedSalonInfo"></div>
-                <div class="services-grid" id="servicesGrid">
-                    <!-- Services will be populated here -->
-                </div>
-            </div>
+            <!-- Error Messages -->
+            <div id="errorMessages" class="error-messages" style="display: none;"></div>
 
-            <!-- Step 3: Select Date & Time -->
-            <div class="booking-step hidden" id="step3">
-                <h2>3. Select Date & Time</h2>
-                <div class="datetime-selection">
-                    <div class="date-picker">
-                        <h3>Select Date</h3>
-                        <input type="date" id="appointmentDate" min="">
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading-indicator" style="display: none;"></div>
+
+            <!-- Booking Steps -->
+            <div class="booking-form-wrapper">
+                <!-- Step 1: Salon Selection -->
+                <div id="step1" class="booking-step active">
+                    <h3>Select a Salon</h3>
+                    <div id="salonGrid" class="salon-grid">
+                        <!-- Salons will be loaded here -->
                     </div>
-                    <div class="time-slots">
-                        <h3>Available Time Slots</h3>
-                        <div class="time-slots-grid" id="timeSlots">
-                            <!-- Time slots will be populated here -->
-                        </div>
+                    <div class="step-actions">
+                        <button id="nextToStep2" class="primary-button" disabled>Continue</button>
                     </div>
                 </div>
-            </div>
 
-            <!-- Step 4: Confirm Details -->
-            <div class="booking-step hidden" id="step4">
-                <h2>4. Confirm Booking</h2>
-                <div class="booking-summary">
+                <!-- Step 2: Date and Time -->
+                <div id="step2" class="booking-step">
+                    <h3>Choose Date & Time</h3>
+                    <div class="date-selection">
+                        <input type="date" id="bookingDate" required>
+                    </div>
+                    <div class="time-slots" id="timeSlots"></div>
+                    <div class="step-actions">
+                        <button id="backToStep1" class="secondary-button">Back</button>
+                        <button id="nextToStep3" class="primary-button" disabled>Continue</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Additional Details -->
+                <div id="step3" class="booking-step">
+                    <h3>Additional Details</h3>
+                    <div class="form-group">
+                        <textarea id="hairstyleRequest" placeholder="Describe your desired hairstyle"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="specialInstructions" placeholder="Any special instructions or requests?"></textarea>
+                    </div>
+                    <div class="step-actions">
+                        <button id="backToStep2" class="secondary-button">Back</button>
+                        <button id="nextToStep4" class="primary-button">Review Booking</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Booking Summary -->
+                <div id="step4" class="booking-step">
                     <h3>Booking Summary</h3>
-                    <div class="summary-details" id="bookingSummary">
-                        <!-- Summary will be populated here -->
+                    <div class="booking-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Salon:</span>
+                            <span id="summarySalon" class="summary-value"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Date:</span>
+                            <span id="summaryDate" class="summary-value"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Time:</span>
+                            <span id="summaryTime" class="summary-value"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Hairstyle Request:</span>
+                            <span id="summaryHairstyle" class="summary-value"></span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Special Instructions:</span>
+                            <span id="summaryInstructions" class="summary-value"></span>
+                        </div>
                     </div>
-                    <div class="customer-details">
-                        <h3>Your Details</h3>
-                        <div class="form-group">
-                            <label for="customerName">Name</label>
-                            <input type="text" id="customerName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="customerPhone">Phone</label>
-                            <input type="tel" id="customerPhone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="customerNotes">Special Notes (Optional)</label>
-                            <textarea id="customerNotes"></textarea>
-                        </div>
+                    <div class="step-actions">
+                        <button id="backToStep3" class="secondary-button">Back</button>
+                        <button id="confirmBookingBtn" class="primary-button">Confirm Booking</button>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="booking-navigation">
-            <button class="nav-btn back-btn" id="backBtn" onclick="previousStep()">Back</button>
-            <button class="nav-btn next-btn" id="nextBtn" onclick="nextStep()">Next</button>
-        </div>
-    </div>
-
-    <!-- Confirmation Modal -->
-    <div class="modal" id="confirmationModal">
-        <div class="modal-content">
-            <h2>Booking Confirmed!</h2>
-            <p>Your appointment has been successfully booked.</p>
-            <div class="confirmation-details" id="confirmationDetails">
-                <!-- Confirmation details will be populated here -->
+            <!-- Booking Success -->
+            <div id="bookingSuccess" class="booking-success" style="display: none;">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3>Booking Confirmed!</h3>
+                <p>Your appointment has been successfully booked.</p>
+                <p>Confirmation details have been sent to your email.</p>
+                <p>Booking ID: <span id="bookingId"></span></p>
+                <div class="success-actions">
+                    <a href="user-dashboard.html" class="primary-button">
+                        <i class="fas fa-user"></i> Go to Dashboard
+                    </a>
+                </div>
             </div>
-            <button class="close-btn" onclick="closeConfirmation()">Close</button>
         </div>
-    </div>
+    </section>
 
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> xxxxxxxx23</p>
+                <p><i class="fas fa-envelope"></i> mensgrooming@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Modern Men's Grooming. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Check authentication before page loads
+        (function() {
+            const token = localStorage.getItem('userToken');
+            const userData = localStorage.getItem('userData');
+            
+            if (!token || !userData) {
+                console.log('No authentication found, redirecting to login');
+                window.location.href = 'user-login.html';
+            } else {
+                console.log('Authentication found, proceeding to load page');
+            }
+        })();
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('userToken');
+            localStorage.removeItem('userData');
+            sessionStorage.clear();
+            window.location.href = 'user-login.html';
+        }
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
+        });
+
+        // Debug authentication data
+        function debugAuth() {
+            console.group('Authentication Debug');
+            console.log('UserToken:', localStorage.getItem('userToken'));
+            console.log('UserData:', localStorage.getItem('userData'));
+            
+            try {
+                const userData = JSON.parse(localStorage.getItem('userData'));
+                console.log('Parsed UserData:', userData);
+            } catch (e) {
+                console.error('Failed to parse userData:', e);
+            }
+            console.groupEnd();
+            
+            return false; // Prevent form submission if used in onclick
+        }
+        
+        // Execute debug on page load
+        document.addEventListener('DOMContentLoaded', debugAuth);
+
+        // Debug authentication on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.group('Booking Page Load Debug');
+            console.log('Current URL:', window.location.href);
+            console.log('Referrer:', document.referrer);
+            console.log('Local Storage Token:', localStorage.getItem('userToken'));
+            console.log('Local Storage User Data:', localStorage.getItem('userData'));
+            console.groupEnd();
+            
+            // Add manual retry button for debugging
+            const debugDiv = document.createElement('div');
+            debugDiv.style.position = 'fixed';
+            debugDiv.style.bottom = '10px';
+            debugDiv.style.right = '10px';
+            debugDiv.style.zIndex = '9999';
+            debugDiv.innerHTML = `
+                <button onclick="window.location.reload()" style="padding: 10px;">
+                    Retry Load
+                </button>
+            `;
+            document.body.appendChild(debugDiv);
+        });
+    </script>
     <script src="booking.js"></script>
-    
 </body>
 </html>

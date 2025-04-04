@@ -1,78 +1,71 @@
-/* Base styles and variables */
+/* Salon Registration CSS */
 :root {
-    --primary-color: #007bff;
-    --secondary-color: #6c757d;
-    --success-color: #28a745;
-    --error-color: #dc3545;
-    --background-color: #f8f9fa;
-    --border-color: #dee2e6;
-    --text-dark: #343a40;
-    --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #16a085;
+    --light-color: #f8f9fa;
+    --dark-color: #2c3e50;
+    --danger-color: #e74c3c;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background-color: var(--background-color);
-    color: var(--text-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
 }
 
-/* Container styles */
-.registration-container {
-    max-width: 800px;
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.container {
+    max-width: 1000px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
-.registration-header {
-    text-align: center;
-    margin-bottom: 2rem;
+form {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.registration-header .logo {
-    height: 80px;
+.form-section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.form-section h3 {
+    margin-top: 0;
+    color: var(--dark-color);
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 0.5rem;
     margin-bottom: 1rem;
 }
 
-.registration-header h1 {
-    font-size: 2rem;
-    color: var(--text-dark);
-    margin-bottom: 0.5rem;
-}
-
-.registration-header p {
-    color: var(--secondary-color);
-}
-
-/* Form sections */
-.form-section {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
-}
-
-.form-section h2 {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-dark);
-}
-
-.form-section h2 i {
-    color: var(--primary-color);
-}
-
-/* Form groups */
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -81,205 +74,127 @@ body {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
+    color: #555;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea,
+.form-group select {
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: inherit;
     font-size: 1rem;
-    transition: border-color 0.3s ease;
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--secondary-color);
     outline: none;
-    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
 
-/* Working hours section */
-.hours-grid {
-    display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-.days-checkboxes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-.days-checkboxes label {
+.form-row {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: normal;
-}
-
-.time-inputs {
-    display: flex;
-    align-items: center;
     gap: 1rem;
-    margin-top: 0.5rem;
 }
 
-.time-inputs input {
-    width: 150px;
+.form-group.half {
+    flex: 1;
 }
 
-/* Services section */
-.service-row {
+.business-hours {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr auto;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    grid-template-columns: 1fr 2fr 2fr;
+    gap: 10px;
     align-items: center;
+    margin-bottom: 0.5rem;
 }
 
-.remove-service {
-    background: none;
-    border: none;
-    color: var(--error-color);
-    cursor: pointer;
-    padding: 0.5rem;
+.business-hours label {
+    margin-bottom: 0;
 }
 
 .add-service-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background-color: var(--success-color);
+    background-color: var(--secondary-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    display: inline-block;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
 }
 
 .add-service-btn:hover {
-    background-color: #218838;
+    background-color: #2980b9;
 }
 
-/* Image upload section */
-.image-upload {
-    border: 2px dashed var(--border-color);
-    border-radius: 5px;
-    padding: 2rem;
-    text-align: center;
+.service-entry {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    position: relative;
+}
+
+.remove-service {
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
     cursor: pointer;
-    transition: border-color 0.3s ease;
-}
-
-.image-upload:hover {
-    border-color: var(--primary-color);
-}
-
-.image-upload label {
+    position: absolute;
+    top: 12px;
+    right: 12px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
 
-.image-upload i {
-    font-size: 2rem;
-    color: var(--primary-color);
+.remove-service:hover {
+    background-color: #c0392b;
 }
 
-.image-upload input {
-    display: none;
-}
-
-.image-preview {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.image-preview img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 5px;
-}
-
-/* Form actions */
 .form-actions {
+    margin-top: 2rem;
     text-align: center;
 }
 
 .submit-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    cursor: pointer;
     font-size: 1.1rem;
     font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s;
 }
 
 .submit-btn:hover {
-    background-color: #0056b3;
+    background-color: #138a72;
 }
 
-/* Notification */
-.notification {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    background-color: var(--success-color);
-    color: white;
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.notification.show {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.notification.error {
-    background-color: var(--error-color);
-}
-
-/* Responsive design */
 @media (max-width: 768px) {
-    .registration-container {
-        margin: 1rem auto;
-    }
-
-    .form-section {
-        padding: 1.5rem;
-    }
-
-    .service-row {
+    .business-hours {
         grid-template-columns: 1fr;
-        gap: 0.5rem;
+        gap: 5px;
     }
-
-    .time-inputs {
+    
+    .form-row {
         flex-direction: column;
-        align-items: stretch;
+        gap: 0;
     }
-
-    .time-inputs input {
-        width: 100%;
-    }
-
-    .submit-btn {
-        width: 100%;
-    }
-}
+} 

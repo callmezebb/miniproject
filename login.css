@@ -1,139 +1,218 @@
-/* General Styles */
-body {
-    font-family: 'Poppins', sans-serif;
+ /* Login and Registration CSS */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --accent-color: #16a085;
+    --light-color: #f8f9fa;
+    --dark-color: #2c3e50;
+    --danger-color: #e74c3c;
+}
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #121212; /* Dark background */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #222222;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.login-container {
+    display: flex;
     align-items: center;
-    height: 100vh;
-    color: #e0e0e0; /* Light text color */
+    justify-content: center;
+    flex: 1;
+    padding: 2rem;
+    margin-top: 2rem;
 }
 
-h1 {
-    font-size: 2rem;
-    color: #ffffff; /* White text for headings */
-    margin-bottom: 1rem;
-}
-
-p {
-    font-size: 0.9rem;
-    color: #b0b0b0; /* Slightly lighter text for paragraphs */
-}
-
-/* Container Styles */
-.login-container, .register-container {
-    background-color: #1e1e1e; /* Darker container background */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+.form-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     padding: 2rem;
     width: 100%;
     max-width: 400px;
+}
+
+.form-container h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
     text-align: center;
-}
-
-.login-card, .register-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Form Styles */
-form {
-    width: 100%;
-    margin-top: 1rem;
 }
 
 .form-group {
     margin-bottom: 1.5rem;
-    text-align: left;
-    width: 100%;
 }
 
-label {
-    display: block;
-    font-size: 0.9rem;
-    color: #e0e0e0; /* Light text for labels */
-    margin-bottom: 0.5rem;
-}
-
-input, select {
+.form-group input {
     width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #333; /* Darker border */
-    border-radius: 5px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     font-size: 1rem;
-    background-color: #2a2a2a; /* Dark input background */
-    color: #e0e0e0; /* Light text for input */
+    transition: border 0.2s;
+}
+
+.form-group input:focus {
+    border-color: var(--secondary-color);
     outline: none;
-    transition: border-color 0.3s;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
 
-input:focus, select:focus {
-    border-color: #007bff; /* Blue border on focus */
-}
-
-/* Button Styles */
-button {
+.submit-btn {
     width: 100%;
-    padding: 0.8rem;
-    background-color: #007bff; /* Primary blue button */
-    color: #fff;
+    padding: 0.75rem;
+    background-color: var(--accent-color);
+    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+.submit-btn:hover {
+    background-color: #138a72;
 }
 
-button:disabled {
-    background-color: #444; /* Disabled button background */
-    cursor: not-allowed;
+.form-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.95rem;
 }
 
-/* Links */
-a {
-    color: #007bff; /* Blue links */
+.form-footer a {
+    color: var(--secondary-color);
     text-decoration: none;
-    font-size: 0.9rem;
 }
 
-a:hover {
+.form-footer a:hover {
     text-decoration: underline;
 }
 
-/* Additional Styles for Login and Registration */
-.register-link, .login-link {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #b0b0b0; /* Subtle text for links */
+.register-form {
+    display: none;
 }
 
-.register-link a, .login-link a {
-    font-weight: 500;
-    color: #007bff; /* Blue links */
+/* Welcome screen styling */
+.welcome-text {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
-/* Responsive Design */
+.welcome-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.welcome-text p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.login-btn {
+    padding: 1rem 2rem;
+    min-width: 180px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.login-btn.user {
+    background-color: #2980b9;
+    color: white;
+}
+
+.login-btn.salon {
+    background-color: #16a085;
+    color: white;
+}
+
+.login-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
-    .login-container, .register-container {
-        padding: 1.5rem;
+    .login-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .login-btn {
+        width: 100%;
+    }
+    
+    .welcome-text h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Add these styles to your existing login.css */
+
+.back-home {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #fff;
+    color: #2c3e50;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.back-button i {
+    font-size: 1rem;
+}
+
+.back-button:hover {
+    background-color: #2c3e50;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .back-home {
+        top: 10px;
+        left: 10px;
     }
 
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    input, select {
-        font-size: 0.9rem;
-    }
-
-    button {
+    .back-button {
+        padding: 0.5rem 1rem;
         font-size: 0.9rem;
     }
 }

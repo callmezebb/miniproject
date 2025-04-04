@@ -188,3 +188,75 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Face Analysis Tab Styles */
+#face-analysis-tab {
+    display: none;
+    padding: 20px;
+}
+
+#face-analysis-tab.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    text-align: center;
+    padding: 40px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error Message */
+.error-message {
+    text-align: center;
+    padding: 40px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.error-message h3 {
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.retry-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.retry-button:hover {
+    background-color: #2980b9;
+}
+
+/* Face Analysis Icon in Sidebar */
+.sidebar-menu a[data-tab="face-analysis"] i {
+    margin-right: 10px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGS-Connect</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .login-btn {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: #ffffff;
+            color: white;
+            min-width: 200px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-btn.user {
+            background-color: #2980b9;
+        }
+
+        .login-btn.salon {
+            background-color: #16a085;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .welcome-text p {
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="welcome-text">
+            <h1>Welcome to MGS-Connect</h1>
+            <p>Please select your role to continue</p>
+        </div>
+        <div class="login-buttons">
+            <button onclick="window.location.href='user-login.html'" class="login-btn user">User Login</button>
+            <button onclick="window.location.href='salon-login.html'" class="login-btn salon">Salon Login</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

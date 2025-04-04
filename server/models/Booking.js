@@ -1,19 +1,22 @@
 const mongoose = require('mongoose');
 
-const AppointmentSchema = new mongoose.Schema({
-    salonId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Salon',
-        required: true
-    },
-    serviceId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service',
-        required: true
-    },
+const bookingSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        required: true
+    },
+    userName: {
+        type: String,
+        required: true
+    },
+    userEmail: {
+        type: String,
+        required: true
+    },
+    salonId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Salon',
         required: true
     },
     date: {
@@ -24,18 +27,24 @@ const AppointmentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    hairstyleRequest: {
+        type: String,
+        default: ''
+    },
+    specialInstructions: {
+        type: String,
+        default: ''
+    },
     status: {
         type: String,
-        enum: ['pending', 'confirmed', 'completed', 'cancelled'],
+        enum: ['pending', 'confirmed', 'cancelled', 'completed'],
         default: 'pending'
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
+}, {
+    timestamps: true
 });
 
-// Create a compound index for checking availability
-AppointmentSchema.index({ salonId: 1, date: 1, time: 1 });
+// Compound index to ensure uniqueness of booking slots
+bookingSchema.index({ salonId: 1, date: 1, time: 1 }, { unique: true });
 
-module.exports = mongoose.model('Appointment', AppointmentSchema);
+module.exports = mongoose.model('Booking', bookingSchema);

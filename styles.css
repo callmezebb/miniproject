@@ -53,7 +53,7 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     background: linear-gradient(rgba(16, 16, 16, 0.9), rgba(16, 16, 16, 0.9)),
-                url('DALL·E\ 2025-02-25\ 20.37.12\ -\ A\ dark\,\ luxurious\ background\ for\ a\ men\'s\ grooming\ website.\ Featuring\ deep\ black\ tones\ with\ subtle\ textures\ such\ as\ brushed\ metal\,\ leather\,\ or\ carbon\ f.webp');
+                url('images/DALL·E\ 2025-02-25\ 20.37.12\ -\ A\ dark\,\ luxurious\ background\ for\ a\ men\'s\ grooming\ website.\ Featuring\ deep\ black\ tones\ with\ subtle\ textures\ such\ as\ brushed\ metal\,\ leather\,\ or\ carbon\ f.webp');
     background-attachment: fixed;
     background-size: cover;
     color: var(--dark-color);
@@ -147,7 +147,7 @@ body {
 .hero {
     height: 100vh;
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-                url('DALL·E\ 2025-02-25\ 20.30.47\ -\ A\ sleek\,\ black-themed\ background\ image\ for\ a\ men\'s\ grooming\ website.\ The\ design\ is\ modern\ and\ minimalist\,\ featuring\ subtle\ textures\ like\ brushed\ metal.webp');
+                url('images/DALL·E\ 2025-02-25\ 20.30.47\ -\ A\ sleek\,\ black-themed\ background\ image\ for\ a\ men\'s\ grooming\ website.\ The\ design\ is\ modern\ and\ minimalist\,\ featuring\ subtle\ textures\ like\ brushed\ metal.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

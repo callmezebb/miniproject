@@ -1,406 +1,689 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Root Variables - Black and White Theme */
+:root {
+    --primary-color: #000000;
+    --primary-dark: #1a1a1a;
+    --secondary-color: #333333;
+    --accent-color: #666666;
+    --success-color: #2c2c2c;
+    --danger-color: #cc0000;
+    --white: #ffffff;
+    --gray-100: #f8f8f8;
+    --gray-200: #eeeeee;
+    --gray-300: #dddddd;
+    --gray-400: #cccccc;
+    --gray-500: #999999;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
 }
 
-body {
+/* Global Styles */
+.booking-section {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
     font-family: 'Poppins', sans-serif;
-    background-color: #000;
-    color: white;
-    min-height: 100vh;
-}
-
-.navbar {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.logo-img {
-    height: 40px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: #64b5f6;
-}
-
-.nav-links a.active {
-    color: #64b5f6;
-}
-
-.logout-btn {
-    background: transparent;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.logout-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: white;
 }
 
 .booking-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    border: 1px solid var(--gray-300);
 }
 
+/* Booking Header */
 .booking-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--gray-200);
+    padding-bottom: 1.5rem;
 }
 
-.booking-header h1 {
-    margin-bottom: 10px;
+.booking-header h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.booking-header p {
-    color: #ccc;
+/* Progress Bar */
+.booking-progress {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.booking-progress::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gray-300);
+    z-index: 1;
+}
+
+.progress-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gray-300);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    transition: var(--transition);
+}
+
+.step-text {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.progress-step.active .step-number {
+    background: var(--primary-color);
+}
+
+.progress-step.active .step-text {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Booking Form */
+.booking-form-wrapper {
+    margin-top: 3rem;
 }
 
 .booking-step {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 30px;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.booking-step h2 {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+.booking-step.active {
+    display: block;
+    opacity: 1;
 }
 
-.salons-grid, .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+.booking-step h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
 }
 
-.salon-card, .service-card {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* Salon Selection */
+.salon-selection {
+    margin-bottom: 2rem;
 }
 
-.salon-card:hover, .service-card:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: #64b5f6;
-}
-
-.salon-card.selected, .service-card.selected {
-    background: rgba(100, 181, 246, 0.2);
-    border-color: #64b5f6;
-}
-
-.salon-name, .service-name {
+.salon-selection label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
     font-weight: 500;
-    margin-bottom: 10px;
 }
 
-.salon-info, .service-info {
-    color: #ccc;
-    font-size: 0.9rem;
-}
-
-.selected-salon-info {
-    margin-bottom: 20px;
-}
-
-.selected-salon-header {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    margin-bottom: 20px;
-    border-left: 3px solid #64b5f6;
-}
-
-.selected-salon-header h3 {
-    margin-bottom: 5px;
-}
-
-.selected-salon-header p {
-    color: #ccc;
-    font-size: 0.9rem;
-}
-
-.datetime-selection {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 30px;
-}
-
-.date-picker h3, .time-slots h3 {
-    margin-bottom: 15px;
-}
-
-input[type="date"] {
+.salon-selection select {
     width: 100%;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    margin-bottom: 20px;
+    padding: 0.8rem;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
 }
 
-.time-slots-grid {
+.salon-selection select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Salon Details */
+.salon-details {
+    background: var(--gray-100);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    border: 1px solid var(--gray-300);
+}
+
+.salon-details h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.salon-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.salon-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.salon-info-item i {
+    color: var(--primary-color);
+}
+
+/* Date Selection */
+.date-selection {
+    margin-bottom: 2rem;
+}
+
+.date-selection label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
+.date-selection input {
+    padding: 0.8rem;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.date-selection input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Time Selection */
+.time-selection {
+    margin-bottom: 2rem;
+}
+
+.time-selection h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.time-slots {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding-right: 10px;
+    gap: 1rem;
 }
 
 .time-slot {
-    padding: 10px;
+    padding: 0.8rem;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--border-radius);
     text-align: center;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
+    font-weight: 500;
 }
 
-.time-slot:hover {
-    background: rgba(255, 255, 255, 0.08);
+.time-slot:hover:not(.booked) {
+    border-color: var(--primary-color);
+    background-color: var(--gray-100);
 }
 
 .time-slot.selected {
-    background: rgba(100, 181, 246, 0.2);
-    border-color: #64b5f6;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
 }
 
-.time-slot.unavailable {
-    opacity: 0.5;
+.time-slot.booked {
+    background-color: var(--gray-200);
+    color: var(--gray-500);
     cursor: not-allowed;
+    border-color: var(--gray-300);
+    text-decoration: line-through;
 }
 
-.closed-message, .no-slots-message {
-    color: #ff6b6b;
-    text-align: center;
-    padding: 20px;
-    background: rgba(255, 107, 107, 0.1);
-    border: 1px solid rgba(255, 107, 107, 0.3);
-}
-
-.booking-summary {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 20px;
-}
-
-.summary-details {
-    margin: 15px 0;
-}
-
-.summary-details p {
-    margin: 10px 0;
-    color: #ccc;
-}
-
-.summary-details strong {
-    color: white;
-}
-
-.customer-details {
-    margin-top: 30px;
-}
-
+/* Form Groups */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: #ccc;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
+    font-weight: 500;
 }
 
-.form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-}
-
-.form-group textarea {
-    height: 100px;
+    padding: 0.8rem;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-family: inherit;
     resize: vertical;
 }
 
-.booking-navigation {
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Step Actions */
+.step-actions {
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 2rem;
+    padding: 1rem 0;
 }
 
-.nav-btn {
+/* Buttons */
+.primary-button,
+.secondary-button {
     padding: 12px 24px;
-    background: transparent;
-    color: white;
-    border: 2px solid white;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.nav-btn:hover {
-    background: white;
-    color: black;
+.primary-button {
+    background-color: #007bff;
+    color: white;
 }
 
-.back-btn {
-    visibility: hidden;
+.primary-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
-.modal {
+.primary-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.secondary-button {
+    background-color: #6c757d;
+    color: white;
+}
+
+.secondary-button:hover {
+    background-color: #5a6268;
+}
+
+/* Booking Summary */
+.booking-summary {
+    background: var(--gray-100);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    border: 1px solid var(--gray-300);
+}
+
+.summary-item {
+    margin-bottom: 1rem;
+    display: flex;
+    border-bottom: 1px solid var(--gray-300);
+    padding-bottom: 0.5rem;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-label {
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 150px;
+}
+
+.summary-value {
+    color: var(--secondary-color);
+}
+
+/* Booking Success */
+.booking-success {
+    text-align: center;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.booking-success h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.booking-success p {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.success-actions {
+    margin-top: 2rem;
+}
+
+/* Error Messages */
+.error-messages {
+    background-color: #ffebeb;
+    color: var(--danger-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--danger-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+    color: var(--primary-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .booking-section {
+        padding: 1rem;
+    }
+
+    .booking-container {
+        padding: 1rem;
+    }
+
+    .booking-progress {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .booking-progress::before {
     display: none;
-    position: fixed;
+}
+
+    .progress-step {
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .time-slots {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+
+    .step-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .primary-button,
+    .secondary-button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .summary-item {
+        flex-direction: column;
+    }
+
+    .summary-label {
+        margin-bottom: 0.3rem;
+    }
+}
+
+/* Hero Section */
+.booking-hero {
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: 4rem 2rem;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/salon-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.booking-hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.booking-hero-content p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+
+/* Salon Grid */
+.salon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+}
+
+.salon-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.salon-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.salon-card.selected {
+    border-color: #3498db;
+    background-color: #f8f9fa;
+}
+
+.salon-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.salon-card-title {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    margin: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.salon-card-info {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+}
+
+.salon-rating {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.salon-rating .stars {
+    color: #ffc107;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+}
+
+.salon-card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--gray-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.salon-services-preview {
+    color: var(--gray-500);
+    font-size: 0.9rem;
+}
+
+/* Selection badge */
+.salon-selected-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: var(--transition);
+}
+
+.salon-card.selected .salon-selected-badge {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Loading skeletons */
+.salon-card-skeleton {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    height: 350px;
+    position: relative;
+}
+
+.salon-card-skeleton::before {
+    content: '';
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    background: linear-gradient(90deg, 
+        var(--gray-200) 0%, 
+        var(--gray-100) 50%, 
+        var(--gray-200) 100%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
 }
 
-.modal-content {
-    background: #000;
-    padding: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    max-width: 500px;
-    width: 90%;
-    text-align: center;
+@keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
-.confirmation-details {
-    margin: 20px 0;
-    text-align: left;
-}
-
-.confirmation-details p {
-    margin: 10px 0;
-}
-
-.close-btn {
-    padding: 10px 20px;
-    background: #64b5f6;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.close-btn:hover {
-    background: #1976d2;
-}
-
-.hidden {
-    display: none;
-}
-
-@media (max-width: 768px) {
-    .datetime-selection {
-        grid-template-columns: 1fr;
-    }
-
-    .booking-step {
-        padding: 20px;
-    }
-
-    .nav-btn {
-        padding: 10px 20px;
-    }
-    .time-slots {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-
-.time-slots-grid {
+/* Time slot improvements */
+.time-slots {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 10px;
+    gap: 1rem;
+    margin: 1.5rem 0;
 }
 
 .time-slot {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px;
+    padding: 0.8rem;
+    border: 2px solid var(--gray-300);
+    border-radius: var(--border-radius);
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
+    transition: var(--transition);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
 }
 
-.time-slot:hover:not(.unavailable) {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: #64b5f6;
+.time-slot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.time-slot:hover:not(.booked)::before {
+    width: 100%;
+}
+
+.time-slot:hover:not(.booked) {
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
 }
 
 .time-slot.selected {
-    background: rgba(100, 181, 246, 0.2);
-    border-color: #64b5f6;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.time-slot.unavailable {
-    background: rgba(255, 255, 255, 0.02);
-    color: rgba(255, 255, 255, 0.3);
-    cursor: not-allowed;
-    border-color: rgba(255, 255, 255, 0.05);
-}
-
-.closed-message, .no-slots-message {
-    color: #ff6b6b;
-    text-align: center;
-    padding: 15px;
-    background: rgba(255, 107, 107, 0.1);
-    border: 1px solid rgba(255, 107, 107, 0.2);
-    border-radius: 4px;
-}
-
-.datetime-selection {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
-}
-
-@media (max-width: 768px) {
-    .datetime-selection {
-        grid-template-columns: 1fr;
+/* Responsive tweaks */
+@media screen and (max-width: 768px) {
+    .booking-hero-content h1 {
+        font-size: 2rem;
     }
     
-    .time-slots-grid {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    .salon-grid {
+        grid-template-columns: 1fr;
     }
-}
-
 }

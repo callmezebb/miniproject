@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Hair Services - Modern Men's Grooming</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="premium-hair-services.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="user-dashboard.html">
+                <img src="images/logo2.webp" alt="GentsCut" style="height: 70px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="user-dashboard.html">Home</a></li>
+            <li><a href="face-analysis.html">Face Analysis</a></li>
+            <li><a href="hairstyles.html">Hairstyles</a></li>
+            <li><a href="premium-hair-services.html" class="active">Premium Hair</a></li>
+            <li><a href="booking.html" class="book-now">Book Now</a></li>
+            <li><a onclick="logout()">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="sub-hero">
+        <div class="hero-content">
+            <h1>Premium Hair Services</h1>
+            <p>Experience luxury hair treatments and transformative solutions</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="service-filters">
+                <button class="filter-btn active" data-filter="all">All Services</button>
+                <button class="filter-btn" data-filter="treatment">Treatments</button>
+                <button class="filter-btn" data-filter="specialized">Specialized</button>
+                <button class="filter-btn" data-filter="styling">Advanced Styling</button>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid" id="premiumServicesGrid">
+                <!-- Service cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> xxxxxxxx23</p>
+                <p><i class="fas fa-envelope"></i> mensgrooming@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> ......</p>
+            </div>
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>MGS Connect is a premium platform that connects users with top grooming professionals.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="premium-hair-services.js"></script>
+</body>
+</html> 

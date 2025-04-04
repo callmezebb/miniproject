@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beard Styles - Modern Men's Grooming</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="beard-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="user-dashboard.html">
+                <img src="images/logo2.webp" alt="GentsCut" style="height: 70px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="user-dashboard.html">Home</a></li>
+            <li><a href="face-analysis.html">Face Analysis</a></li>
+            <li><a href="hairstyles.html">Hairstyles</a></li>
+            <li><a href="beard-styles.html" class="active">Beard Styles</a></li>
+            <li><a href="booking.html" class="book-now">Book Now</a></li>
+            <li><a onclick="logout()">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="sub-hero">
+        <div class="hero-content">
+            <h1>Professional Beard Styling</h1>
+            <p>Discover sophisticated beard styles perfect for the modern professional</p>
+        </div>
+    </section>
+
+    <!-- Beard Styles Grid -->
+    <section class="beard-styles-section">
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="style-filters">
+                <div class="style-filters">
+                    <button class="filter-btn active" data-filter="all">All Styles</button>
+                    <button class="filter-btn" data-filter="short">Short & Clean</button>
+                    <button class="filter-btn" data-filter="medium">Medium Length</button>
+                </div>
+            </div>
+
+            <!-- Styles Grid -->
+            <div class="styles-grid" id="beardStylesGrid">
+                <!-- Beard style cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> xxxxxxxx23</p>
+                <p><i class="fas fa-envelope"></i> mensgrooming@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> ......</p>
+            </div>
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>MGS Connect is a premium platform that connects users with top grooming professionals.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="beard-styles.js"></script>
+</body>
+</html> 
