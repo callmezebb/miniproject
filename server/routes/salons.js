@@ -37,13 +37,29 @@ router.get('/registered', protect, async (req, res) => {
 // Get salon by ID - this should come AFTER specific routes
 router.get('/:id', protect, async (req, res) => {
   try {
-    const salon = await Salon.findById(req.params.id).select('-password -__v');
+    const salon = await Salon.findById(req.params.id)
+      .select('-password -__v')
+      .lean();
     
     if (!salon) {
       return res.status(404).json({ message: 'Salon not found' });
     }
     
-    res.json(salon);
+    // Add debug logging
+    console.log('Fetched salon data:', salon);
+    
+    res.json({
+      success: true,
+      data: {
+        name: salon.name,
+        ownerName: salon.ownerName,
+        email: salon.email,
+        phone: salon.phone || '',
+        location: salon.location || '',
+        services: salon.services || [],
+        isProfileComplete: salon.isProfileComplete
+      }
+    });
   } catch (error) {
     console.error('Error fetching salon:', error);
     res.status(500).json({ message: 'Error fetching salon', error: error.message });

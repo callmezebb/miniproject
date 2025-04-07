@@ -10,7 +10,69 @@ document.addEventListener('DOMContentLoaded', function() {
     if (fromFaceAnalysis && analyzedFaceShape) {
         handleFaceAnalysisRedirect();
     }
+
+    // Add click event listeners to all hairstyle cards
+    initializeHairstyleCards();
 });
+
+function initializeHairstyleCards() {
+    const hairstyleCards = document.querySelectorAll('.hairstyle-card');
+    
+    hairstyleCards.forEach(card => {
+        // Store the hairstyle name in a data attribute for easy access
+        const hairstyleName = card.querySelector('h3').textContent;
+        card.setAttribute('data-hairstyle', hairstyleName);
+        
+        // Add click handler for the entire card
+        card.addEventListener('click', function(e) {
+            // Get the hairstyle name from the data attribute
+            const selectedService = e.currentTarget.getAttribute('data-hairstyle');
+            
+            // Store the service name in localStorage
+            localStorage.setItem('selectedService', selectedService);
+            console.log('Selected service:', selectedService);
+            
+            // Auto-fill the textarea in booking form
+            const bookingForm = document.querySelector('.booking-form-wrapper');
+            if (bookingForm) {
+                const textarea = bookingForm.querySelector('#hairstyleRequest');
+                if (textarea) {
+                    textarea.value = `${selectedService}`;
+                }
+            }
+            
+            // Redirect to booking page
+            window.location.href = 'booking.html';
+        });
+        
+        // Add click handler for the book button specifically
+        const bookButton = card.querySelector('.style-btn');
+        if (bookButton) {
+            bookButton.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent the click from bubbling up to the card
+                
+                // Get the hairstyle name from the parent card's data attribute
+                const selectedService = e.currentTarget.closest('.hairstyle-card').getAttribute('data-hairstyle');
+                
+                // Store the service name in localStorage
+                localStorage.setItem('selectedService', selectedService);
+                console.log('Selected service:', selectedService);
+                
+                // Auto-fill the textarea in booking form
+                const bookingForm = document.querySelector('.booking-form-wrapper');
+                if (bookingForm) {
+                    const textarea = bookingForm.querySelector('#hairstyleRequest');
+                    if (textarea) {
+                        textarea.value = `${selectedService}`;
+                    }
+                }
+                
+                // Redirect to booking page
+                window.location.href = 'booking.html';
+            });
+        }
+    });
+}
 
 function initializeHairstylesPage() {
     // Initialize filters
@@ -314,12 +376,10 @@ function createHairstyleCard(hairstyle) {
 }
 
 function redirectToBooking(hairstyleId, hairstyleName) {
-    // Store hairstyle details in sessionStorage
-    sessionStorage.setItem('selectedHairstyle', JSON.stringify({
-        id: hairstyleId,
-        name: hairstyleName
-    }));
+    // Store the hairstyle info before redirecting
+    localStorage.setItem('selectedService', hairstyleName);
+    localStorage.setItem('fromHairstyles', 'true');
+    
+    // Redirect to booking page
     window.location.href = 'booking.html';
 }
-
-

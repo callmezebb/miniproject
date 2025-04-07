@@ -26,6 +26,7 @@
     max-width: 1000px;
     margin: 0 auto;
     font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
 }
 
 .booking-container {
@@ -36,6 +37,7 @@
     border: 1px solid var(--gray-300);
     backdrop-filter: blur(10px);
     background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-color);
 }
 
 /* Booking Header */
@@ -310,12 +312,22 @@
 
 .form-group textarea {
     width: 100%;
-    padding: 0.8rem;
-    border: 2px solid var(--gray-300);
+    padding: 1rem;
+    border: 1px solid var(--gray-300);
     border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-family: inherit;
+    margin-bottom: 1rem;
     resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+    color: var(--primary-color);
+}
+
+#hairstyleRequest {
+    color: var(--primary-color);
+}
+
+#hairstyleRequest::placeholder {
+    color: var(--gray-500);
 }
 
 .form-group textarea:focus {
@@ -515,7 +527,7 @@
     color: var(--white);
     text-align: center;
     padding: 4rem 2rem;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/salon-bg.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/salon-bg.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -548,6 +560,7 @@
     padding: 2rem;
     transition: var(--transition);
     border: 1px solid var(--gray-300);
+    background-image: url('/images/salon-placeholder.jpg');
 }
 
 .salon-card:hover {

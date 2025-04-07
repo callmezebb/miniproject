@@ -79,36 +79,78 @@ function setupTabs() {
 }
 
 // Load salon data into the dashboard
-function loadSalonData() {
-    // Get salon data from localStorage
-    const salonName = localStorage.getItem('salonName') || 'Your Salon';
-    const salonPhone = localStorage.getItem('salonPhone') || '-';
-    const salonLocation = localStorage.getItem('salonLocation') || '-';
-    const salonEmail = localStorage.getItem('salonEmail') || '-';
-    const salonDescription = localStorage.getItem('salonDescription') || '';
+async function loadSalonData() {
+    const token = localStorage.getItem('token');
+    const salonId = localStorage.getItem('salonId');
     
-    // Try to parse business hours and services from localStorage
-    let businessHours = {};
-    let services = [];
+    if (!token || !salonId) {
+        console.error('No token or salonId found');
+        return;
+    }
     
     try {
-        const storedHours = localStorage.getItem('salonBusinessHours');
-        if (storedHours) {
-            businessHours = JSON.parse(storedHours);
+        const response = await fetch(`http://localhost:5000/api/salons/${salonId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch salon data');
         }
-    } catch (e) {
-        console.error('Error parsing business hours:', e);
+        
+        const response_data = await response.json();
+        console.log('Salon data received:', response_data);
+        
+        if (!response_data.success) {
+            throw new Error(response_data.message || 'Failed to fetch salon data');
+        }
+        
+        const salonData = response_data.data;
+        
+        // Update the UI with salon data
+        document.querySelectorAll('#salonName, #sidebarSalonName').forEach(el => {
+            el.textContent = salonData.name || 'Your Salon';
+        });
+        document.getElementById('overviewPhone').textContent = salonData.phone || '-';
+        document.getElementById('overviewLocation').textContent = salonData.location || '-';
+        document.getElementById('overviewEmail').textContent = salonData.email || '-';
+        document.getElementById('sidebarOwnerName').textContent = salonData.ownerName || 'Owner';
+        
+        // Update services section
+        const servicesContainer = document.getElementById('servicesContainer');
+        if (servicesContainer) {
+            servicesContainer.innerHTML = '';
+            
+            if (salonData.services && salonData.services.length > 0) {
+                salonData.services.forEach(service => {
+                    const serviceCard = document.createElement('div');
+                    serviceCard.className = 'service-card';
+                    serviceCard.innerHTML = `
+                        <h3>${service.name}</h3>
+                        <p class="price">$${service.price}</p>
+                        <p class="duration">${service.duration} minutes</p>
+                        <p class="description">${service.description || ''}</p>
+                    `;
+                    servicesContainer.appendChild(serviceCard);
+                });
+            } else {
+                servicesContainer.innerHTML = '<p class="no-services">No services added yet</p>';
+            }
+        }
+    } catch (error) {
+        console.error('Error loading salon data:', error);
+        // Show error message to user
+        const errorContainer = document.getElementById('errorMessages');
+        if (errorContainer) {
+            errorContainer.textContent = 'Failed to load salon data. Please refresh the page.';
+            errorContainer.style.display = 'block';
+        }
     }
+}
 
-    try {
-        const storedServices = localStorage.getItem('salonServices');
-        if (storedServices) {
-            services = JSON.parse(storedServices);
-        }
-    } catch (e) {
-        console.error('Error parsing services:', e);
-    }
-    
+
+function updateDashboardUI(salonName, salonPhone, salonLocation, salonEmail, businessHours, services) {
     // Update salon name in all locations
     document.querySelectorAll('#salonName, #sidebarSalonName').forEach(el => {
         el.textContent = salonName;
@@ -378,7 +420,7 @@ function createBookingCard(booking) {
             </p>
             <p class="booking-detail">
                 <strong>Service</strong>
-                ${booking.service || 'Not specified'}
+                ${booking.hairstyleRequest || 'Not specified'}
             </p>
             <p class="booking-detail">
                 <strong>Date</strong>
@@ -609,7 +651,68 @@ function loadAndDisplayServices() {
     loadingDiv.textContent = 'Loading services...';
     servicesContainer.appendChild(loadingDiv);
     
-    // Rest of your existing loadAndDisplayServices code...
+    // Get salon ID from localStorage
+    const salonId = localStorage.getItem('salonId');
+    if (!salonId) {
+        console.error('Salon ID not found!');
+        servicesContainer.innerHTML = '<p>Error: Could not load services. Please try logging in again.</p>';
+        return;
+    }
+    
+    // Fetch services from the server
+    fetch(`/api/salons/${salonId}/services`, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Remove loading state
+        servicesContainer.removeChild(loadingDiv);
+        
+        if (data.success && data.services) {
+            // Display services
+            if (data.services.length > 0) {
+                const servicesGrid = document.createElement('div');
+                servicesGrid.className = 'services-grid';
+                
+                data.services.forEach(service => {
+                    const serviceCard = document.createElement('div');
+                    serviceCard.className = 'service-card';
+                    serviceCard.innerHTML = `
+                        <h3>${service.name}</h3>
+                        <p>${service.description || 'No description provided.'}</p>
+                        <div class="service-meta">
+                            <span class="price">$${service.price.toFixed(2)}</span>
+                            <span class="duration">${service.duration} min</span>
+                        </div>
+                        <div class="service-actions">
+                            <button class="btn-edit" onclick="editService('${service._id}')">Edit</button>
+                            <button class="btn-delete" onclick="deleteService('${service._id}')">Delete</button>
+                        </div>
+                    `;
+                    servicesGrid.appendChild(serviceCard);
+                });
+                
+                servicesContainer.appendChild(servicesGrid);
+            } else {
+                servicesContainer.innerHTML += `
+                    <p class="no-services-message">No services have been added yet. Click the button above to add your first service.</p>
+                `;
+            }
+        } else {
+            servicesContainer.innerHTML += `
+                <p class="error-message">Error loading services: ${data.message || 'Unknown error occurred'}</p>
+            `;
+        }
+    })
+    .catch(error => {
+        console.error('Error loading services:', error);
+        servicesContainer.removeChild(loadingDiv);
+        servicesContainer.innerHTML += `
+            <p class="error-message">Failed to load services. Please try again later.</p>
+        `;
+    });
 }
 
 

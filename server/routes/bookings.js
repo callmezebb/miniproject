@@ -46,8 +46,9 @@ router.post('/', protect, async (req, res) => {
         // Create new booking
         const booking = new Booking({
             userId: req.user.id,
-            userName: req.user.name,
-            userEmail: req.user.email,
+            userName: req.body.userName || req.user.name,
+            userEmail: req.body.userEmail || req.user.email,
+            userPhone: req.body.userPhone,
             salonId: req.body.salonId,
             date: req.body.date,
             time: req.body.time,

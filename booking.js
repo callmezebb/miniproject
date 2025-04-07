@@ -4,6 +4,7 @@ class BookingSystem {
         this.selectedTimeSlot = null;
         this.selectedDate = null;
         this.currentStep = 1;
+        this.token = localStorage.getItem('userToken');
         this.init();
     }
 
@@ -20,6 +21,9 @@ class BookingSystem {
             this.checkForHairstyleRedirect();
             this.setupEventListeners();
             this.setMinDate();
+            
+            // Fill in selected hairstyle if exists
+            this.fillSelectedHairstyle();
             
             console.log('Booking system initialized');
         } catch (error) {
@@ -73,6 +77,9 @@ class BookingSystem {
     handleAuthFailure(reason) {
         console.error('Authentication failed:', reason);
         sessionStorage.setItem('redirectAfterLogin', window.location.href);
+        // Clear the selected hairstyle from localStorage
+        localStorage.removeItem('selectedHairstyle');
+        
         this.showError('Please log in to access the booking system');
         
         setTimeout(() => {
@@ -224,33 +231,35 @@ class BookingSystem {
     }
 
     displaySalonDetails(salon) {
-        const detailsContainer = document.getElementById('selectedSalonDetails');
+        const detailsContainer = document.getElementById('salonDetails');
         detailsContainer.innerHTML = `
-            <h4>${this.escapeHtml(salon.name)}</h4>
-            <div class="salon-info">
-                <div class="salon-info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>${this.escapeHtml(salon.location)}</span>
+            <div class="salon-details">
+                <h4>${this.escapeHtml(salon.name)}</h4>
+                <div class="salon-info">
+                    <div class="salon-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${this.escapeHtml(salon.location)}</span>
+                    </div>
+                    <div class="salon-info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>${this.escapeHtml(salon.phone)}</span>
+                    </div>
+                    <div class="salon-info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>${this.formatBusinessHours(salon.businessHours)}</span>
+                    </div>
                 </div>
-                <div class="salon-info-item">
-                    <i class="fas fa-phone"></i>
-                    <span>${this.escapeHtml(salon.phone)}</span>
-                </div>
-                <div class="salon-info-item">
-                    <i class="fas fa-clock"></i>
-                    <span>${this.formatBusinessHours(salon.businessHours)}</span>
-                </div>
+                ${salon.services && salon.services.length > 0 ? `
+                    <div class="salon-services">
+                        <h5>Services Offered:</h5>
+                        <ul>
+                            ${salon.services.map(service => `
+                                <li>${this.escapeHtml(service.name)} - $${service.price}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
             </div>
-            ${salon.services && salon.services.length > 0 ? `
-                <div class="salon-services">
-                    <h5>Services Offered:</h5>
-                    <ul>
-                        ${salon.services.map(service => `
-                            <li>${this.escapeHtml(service.name)} - $${service.price}</li>
-                        `).join('')}
-                    </ul>
-                </div>
-            ` : ''}
         `;
         detailsContainer.style.display = 'block';
     }
@@ -470,10 +479,23 @@ class BookingSystem {
         document.getElementById('nextToStep3').disabled = false;
     }
 
+    fillSelectedHairstyle() {
+        const selectedService = localStorage.getItem('selectedService');
+        if (selectedService) {
+            const textarea = document.getElementById('hairstyleRequest');
+            if (textarea) {
+                textarea.value = `${selectedService}`;
+            }
+        }
+    }
+
     prepareAndGoToStep4() {
-        // Update summary information
+        // Get service request from textarea or localStorage
+        const serviceRequest = document.getElementById('hairstyleRequest').value || localStorage.getItem('selectedService') || 'No specific request';
+        
+        // Prepare summary elements
         const summaryElements = {
-            'summarySalon': document.querySelector('.salon-card.selected .salon-card-title')?.textContent || 'Not selected',
+            'summarySalon': this.selectedSalonId ? document.querySelector(`.salon-card[data-id="${this.selectedSalonId}"] h4`)?.textContent : 'Not selected',
             'summaryDate': this.selectedDate ? new Date(this.selectedDate).toLocaleDateString('en-US', {
                 weekday: 'long',
                 year: 'numeric',
@@ -481,7 +503,7 @@ class BookingSystem {
                 day: 'numeric'
             }) : 'Not selected',
             'summaryTime': this.selectedTimeSlot || 'Not selected',
-            'summaryHairstyle': document.getElementById('hairstyleRequest').value || 'No specific request',
+            'summaryHairstyle': serviceRequest,
             'summaryInstructions': document.getElementById('specialInstructions').value || 'None'
         };
 
@@ -505,25 +527,26 @@ class BookingSystem {
         try {
             this.showLoading(true);
             const userData = JSON.parse(localStorage.getItem('userData'));
+            const serviceRequest = document.getElementById('hairstyleRequest').value || localStorage.getItem('selectedService') || '';
+            
             const bookingData = {
-                userId: userData._id,
                 salonId: this.selectedSalonId,
                 date: this.selectedDate,
                 time: this.selectedTimeSlot,
-                hairstyleRequest: document.getElementById('hairstyleRequest').value,
-                specialInstructions: document.getElementById('specialInstructions').value,
-                status: 'pending',
-                customerName: userData.name,
-                customerEmail: userData.email,
-                customerPhone: userData.phone || '',
-                createdAt: new Date().toISOString()
+                hairstyleRequest: serviceRequest,
+                specialInstructions: document.getElementById('specialInstructions')?.value || '',
+                userName: userData.name || '',
+                userEmail: userData.email || '',
+                userPhone: userData.phone || '',
+                createdAt: new Date().toISOString(),
+                status: 'pending'
             };
 
             const response = await fetch('http://localhost:5000/api/bookings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('userToken')}`
+                    'Authorization': `Bearer ${this.token}`
                 },
                 body: JSON.stringify(bookingData)
             });
@@ -534,13 +557,16 @@ class BookingSystem {
             }
 
             const result = await response.json();
-            
-            // Show success message and update UI
+
+            // Clear service selection from localStorage after successful booking
+            localStorage.removeItem('selectedService');
+
             this.showBookingSuccess(result);
-            
-            // Clear selected hairstyle from session storage
-            sessionStorage.removeItem('selectedHairstyle');
-            
+            this.showSuccess('Booking confirmed successfully!');
+            setTimeout(() => {
+                window.location.href = 'my-appointments.html';
+            }, 2000);
+
         } catch (error) {
             console.error('Error creating booking:', error);
             this.showError(`Booking failed: ${error.message}`);
@@ -612,20 +638,25 @@ class BookingSystem {
         successDiv.innerHTML = successContent;
     }
 
+    showSuccess(message) {
+        const successDiv = document.getElementById('bookingSuccess');
+        if (successDiv) {
+            document.querySelector('.booking-form-wrapper').style.display = 'none';
+            successDiv.style.display = 'block';
+            successDiv.textContent = message;
+        }
+    }
+
     showError(message) {
-        const errorDiv = document.getElementById('errorMessages');
-        if (errorDiv) {
-            errorDiv.innerHTML = `
-                <i class="fas fa-exclamation-circle"></i>
-                ${message}
-            `;
-            errorDiv.style.display = 'block';
+        const errorContainer = document.getElementById('errorMessages');
+        if (errorContainer) {
+            errorContainer.textContent = message;
+            errorContainer.style.display = 'block';
             
             setTimeout(() => {
-                errorDiv.style.display = 'none';
+                errorContainer.style.display = 'none';
             }, 5000);
         }
-        console.error('Error:', message);
     }
 
     showLoading(show = true) {

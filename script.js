@@ -1,3 +1,8 @@
+// Clear selectedService when landing on home page
+document.addEventListener('DOMContentLoaded', function() {
+    localStorage.removeItem('selectedService');
+});
+
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.nav-links');
 

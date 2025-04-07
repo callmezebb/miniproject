@@ -31,6 +31,60 @@ class BeardStylesManager {
                 this.filterStyles(button.dataset.filter);
             });
         });
+
+        // Add click handlers for beard style cards
+        const styleCards = document.querySelectorAll('.style-card');
+        styleCards.forEach(card => {
+            // Add click handler for the entire card
+            card.addEventListener('click', function(e) {
+                // Get the style name from the h3 element
+                const selectedService = card.querySelector('.style-name').textContent;
+                
+                // Store the service name in localStorage
+                localStorage.setItem('selectedService', selectedService);
+                console.log('Selected service:', selectedService);
+                
+                // Auto-fill the textarea in booking form
+                const bookingForm = document.querySelector('.booking-form-wrapper');
+                if (bookingForm) {
+                    const textarea = bookingForm.querySelector('#hairstyleRequest');
+                    if (textarea) {
+                        textarea.value = `${selectedService}`;
+                    }
+                }
+                
+                // Redirect to booking page
+                window.location.href = 'booking.html';
+            });
+            
+            // Add click handler for the book button specifically
+            const bookButton = card.querySelector('.book-style-btn');
+            if (bookButton) {
+                bookButton.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default link behavior
+                    e.stopPropagation(); // Prevent the click from bubbling up to the card
+                    
+                    // Get the style name from the parent card's h3 element
+                    const selectedService = e.currentTarget.closest('.style-card').querySelector('.style-name').textContent;
+                    
+                    // Store the service name in localStorage
+                    localStorage.setItem('selectedService', selectedService);
+                    console.log('Selected service:', selectedService);
+                    
+                    // Auto-fill the textarea in booking form
+                    const bookingForm = document.querySelector('.booking-form-wrapper');
+                    if (bookingForm) {
+                        const textarea = bookingForm.querySelector('#hairstyleRequest');
+                        if (textarea) {
+                            textarea.value = `${selectedService}`;
+                        }
+                    }
+                    
+                    // Redirect to booking page
+                    window.location.href = 'booking.html';
+                });
+            }
+        });
     }
 
     filterStyles(category) {
