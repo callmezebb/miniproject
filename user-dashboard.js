@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
+    // Clear selectedService when landing on dashboard
+    localStorage.removeItem('selectedService');
     // Check authentication
     
 

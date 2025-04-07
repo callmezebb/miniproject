@@ -426,7 +426,55 @@ header h1 {
         flex-direction: column;
     }
 }
-/* Add these styles to your existing salon-dashboard.css */
+/* Services styles */
+.service-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.service-card h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.service-card .price {
+    font-size: 1.2em;
+    color: #2c5282;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.service-card .duration {
+    color: #666;
+    margin: 5px 0;
+}
+
+.service-card .description {
+    color: #555;
+    margin: 10px 0 0 0;
+    font-size: 0.9em;
+}
+
+.no-services {
+    text-align: center;
+    color: #666;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+#errorMessages {
+    display: none;
+    background-color: #fed7d7;
+    border: 1px solid #f56565;
+    color: #c53030;
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
 
 .bookings-grid {
     display: grid;

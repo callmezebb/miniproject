@@ -28,6 +28,60 @@ class FaceTreatmentsManager {
                 this.filterTreatments(button.dataset.filter);
             });
         });
+
+        // Add click handlers for treatment cards
+        const treatmentCards = document.querySelectorAll('.treatment-card');
+        treatmentCards.forEach(card => {
+            // Add click handler for the entire card
+            card.addEventListener('click', function(e) {
+                // Get the treatment name from the h3 element
+                const selectedService = card.querySelector('h3').textContent;
+                
+                // Store the service name in localStorage
+                localStorage.setItem('selectedService', selectedService);
+                console.log('Selected service:', selectedService);
+                
+                // Auto-fill the textarea in booking form
+                const bookingForm = document.querySelector('.booking-form-wrapper');
+                if (bookingForm) {
+                    const textarea = bookingForm.querySelector('#hairstyleRequest');
+                    if (textarea) {
+                        textarea.value = `${selectedService}`;
+                    }
+                }
+                
+                // Redirect to booking page
+                window.location.href = 'booking.html';
+            });
+            
+            // Add click handler for the book button specifically
+            const bookButton = card.querySelector('.book-treatment-btn');
+            if (bookButton) {
+                bookButton.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default link behavior
+                    e.stopPropagation(); // Prevent the click from bubbling up to the card
+                    
+                    // Get the treatment name from the parent card's h3 element
+                    const selectedService = e.currentTarget.closest('.treatment-card').querySelector('h3').textContent;
+                    
+                    // Store the service name in localStorage
+                    localStorage.setItem('selectedService', selectedService);
+                    console.log('Selected service:', selectedService);
+                    
+                    // Auto-fill the textarea in booking form
+                    const bookingForm = document.querySelector('.booking-form-wrapper');
+                    if (bookingForm) {
+                        const textarea = bookingForm.querySelector('#hairstyleRequest');
+                        if (textarea) {
+                            textarea.value = `${selectedService}`;
+                        }
+                    }
+                    
+                    // Redirect to booking page
+                    window.location.href = 'booking.html';
+                });
+            }
+        });
     }
 
     filterTreatments(category) {

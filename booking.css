@@ -1,20 +1,23 @@
 /* Root Variables - Black and White Theme */
 :root {
-    --primary-color: #000000;
-    --primary-dark: #1a1a1a;
+    --primary-color: #1a1a1a;
+    --primary-dark: #000000;
     --secondary-color: #333333;
-    --accent-color: #666666;
-    --success-color: #2c2c2c;
-    --danger-color: #cc0000;
+    --accent-color: #d4af37;
+    --accent-light: #e5c158;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
     --white: #ffffff;
-    --gray-100: #f8f8f8;
-    --gray-200: #eeeeee;
-    --gray-300: #dddddd;
-    --gray-400: #cccccc;
-    --gray-500: #999999;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #ced4da;
+    --gray-500: #adb5bd;
+    --shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.15);
     --border-radius: 8px;
-    --transition: all 0.3s ease;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Global Styles */
@@ -23,14 +26,18 @@
     max-width: 1000px;
     margin: 0 auto;
     font-family: 'Poppins', sans-serif;
+    color: var(--primary-color);
 }
 
 .booking-container {
     background: var(--white);
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    padding: 2.5rem;
     border: 1px solid var(--gray-300);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--primary-color);
 }
 
 /* Booking Header */
@@ -89,6 +96,15 @@
     font-weight: 600;
     margin-bottom: 0.5rem;
     transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    border: 2px solid transparent;
+}
+
+.progress-step.active .step-number {
+    background: var(--accent-color);
+    border-color: var(--accent-light);
+    transform: scale(1.1);
+    box-shadow: var(--shadow);
 }
 
 .step-text {
@@ -143,15 +159,28 @@
 
 .salon-selection select {
     width: 100%;
-    padding: 0.8rem;
+    padding: 1rem;
     border: 2px solid var(--gray-300);
     border-radius: var(--border-radius);
     font-size: 1rem;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1em;
+    transition: var(--transition);
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.salon-selection select:hover {
+    border-color: var(--accent-color);
+}
+
+.salon-selection select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
 }
 
 .salon-selection select:focus {
@@ -162,10 +191,18 @@
 /* Salon Details */
 .salon-details {
     background: var(--gray-100);
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: var(--border-radius);
     margin-bottom: 2rem;
     border: 1px solid var(--gray-300);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.salon-details:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent-color);
 }
 
 .salon-details h4 {
@@ -186,7 +223,8 @@
 }
 
 .salon-info-item i {
-    color: var(--primary-color);
+    color: var(--accent-color);
+    font-size: 1.2rem;
 }
 
 /* Date Selection */
@@ -274,12 +312,22 @@
 
 .form-group textarea {
     width: 100%;
-    padding: 0.8rem;
-    border: 2px solid var(--gray-300);
+    padding: 1rem;
+    border: 1px solid var(--gray-300);
     border-radius: var(--border-radius);
-    font-size: 1rem;
-    font-family: inherit;
+    margin-bottom: 1rem;
     resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+    color: var(--primary-color);
+}
+
+#hairstyleRequest {
+    color: var(--primary-color);
+}
+
+#hairstyleRequest::placeholder {
+    color: var(--gray-500);
 }
 
 .form-group textarea:focus {
@@ -479,7 +527,7 @@
     color: var(--white);
     text-align: center;
     padding: 4rem 2rem;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/salon-bg.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/images/salon-bg.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -506,10 +554,19 @@
 }
 
 .salon-card {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 1.5rem;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    padding: 2rem;
+    transition: var(--transition);
+    border: 1px solid var(--gray-300);
+    background-image: url('/images/salon-placeholder.jpg');
+}
+
+.salon-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent-color);
     position: relative;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;

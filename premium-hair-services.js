@@ -28,6 +28,60 @@ class PremiumHairServicesManager {
                 this.filterServices(button.dataset.filter);
             });
         });
+
+        // Add click handlers for service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            // Add click handler for the entire card
+            card.addEventListener('click', function(e) {
+                // Get the service name from the h3 element
+                const selectedService = card.querySelector('.service-name').textContent;
+                
+                // Store the service name in localStorage
+                localStorage.setItem('selectedService', selectedService);
+                console.log('Selected service:', selectedService);
+                
+                // Auto-fill the textarea in booking form
+                const bookingForm = document.querySelector('.booking-form-wrapper');
+                if (bookingForm) {
+                    const textarea = bookingForm.querySelector('#hairstyleRequest');
+                    if (textarea) {
+                        textarea.value = `${selectedService}`;
+                    }
+                }
+                
+                // Redirect to booking page
+                window.location.href = 'booking.html';
+            });
+            
+            // Add click handler for the book button specifically
+            const bookButton = card.querySelector('.book-service-btn');
+            if (bookButton) {
+                bookButton.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default link behavior
+                    e.stopPropagation(); // Prevent the click from bubbling up to the card
+                    
+                    // Get the service name from the parent card's h3 element
+                    const selectedService = e.currentTarget.closest('.service-card').querySelector('.service-name').textContent;
+                    
+                    // Store the service name in localStorage
+                    localStorage.setItem('selectedService', selectedService);
+                    console.log('Selected service:', selectedService);
+                    
+                    // Auto-fill the textarea in booking form
+                    const bookingForm = document.querySelector('.booking-form-wrapper');
+                    if (bookingForm) {
+                        const textarea = bookingForm.querySelector('#hairstyleRequest');
+                        if (textarea) {
+                            textarea.value = `${selectedService}`;
+                        }
+                    }
+                    
+                    // Redirect to booking page
+                    window.location.href = 'booking.html';
+                });
+            }
+        });
     }
 
     filterServices(category) {
