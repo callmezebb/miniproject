@@ -1,4 +1,3 @@
-
 // Define protected routes
 const protectedRoutes = [
     'hairstyles.html',
@@ -10,10 +9,12 @@ const protectedRoutes = [
 
 // Helper function to get token and user details from localStorage
 function getAuthDetails() {
+    const token = localStorage.getItem('token');
     return {
-        token: localStorage.getItem('token'),
+        token: token, // Token should already include 'Bearer ' prefix
         userType: localStorage.getItem('userType'),
-        salonDetails: localStorage.getItem('salonDetails'),
+        userName: localStorage.getItem('userName'),
+        userEmail: localStorage.getItem('userEmail')
     };
 }
 
@@ -25,23 +26,22 @@ function redirectTo(page) {
 
 // Function to validate the token with the server
 async function validateToken(token) {
+    if (!token) return null;
+    
     try {
-        const response = await fetch('http://localhost:5000/api/auth/me', {
+        const response = await fetch('http://localhost:5000/api/auth/validate', {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': token // Token already includes 'Bearer ' prefix
             }
         });
-
-        const data = await response.json();
-        console.log('Token Validation Response:', data);
-
-        if (!response.ok || !data.success) {
+        
+        if (!response.ok) {
             throw new Error('Token validation failed');
         }
-
-        return data; // Return user data if validation is successful
+        
+        return await response.json();
     } catch (error) {
-        console.error('Error validating token:', error);
+        console.error('Token validation error:', error);
         return null;
     }
 }
