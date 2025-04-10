@@ -235,7 +235,7 @@ async function loadFaceAnalysis() {
         
         // Initialize face analysis functionality
         const script = document.createElement('script');
-        script.src = 'face-analysis.js';
+        script.src = './face-analysis.js';
         document.body.appendChild(script);
         
         // Show the face analysis tab

@@ -18,15 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password, userType }), // Include userType in request
+                body: JSON.stringify({ email, password, userType }),
             });
 
             const data = await response.json();
-            console.log('Login response:', data); // Debug log
+            console.log('Login response:', data);
 
             if (response.ok && data.token) {
-                // Store user data
-                localStorage.setItem('token', data.token);
+                // Store token with Bearer prefix
+                localStorage.setItem('token', `Bearer ${data.token}`);
                 localStorage.setItem('userType', data.user.userType);
                 localStorage.setItem('userName', data.user.name);
                 localStorage.setItem('userEmail', data.user.email);

@@ -443,9 +443,24 @@ class BookingSystem {
 
     displayTimeSlots(availableSlots) {
         const timeSlotsContainer = document.getElementById('timeSlots');
-        const businessHours = this.generateTimeSlots();
-        
-        timeSlotsContainer.innerHTML = businessHours.map(time => {
+        const businessHours = this.generateTimeSlots(); // assumes array like ['09:00', '09:30', ..., '17:30']
+        const selectedDate = document.getElementById('bookingDate')?.value;
+        const todayDate = new Date().toISOString().split('T')[0];
+    
+        // Get current system time only if the selected date is today
+        const now = new Date();
+        const currentHours = now.getHours();
+        const currentMinutes = now.getMinutes();
+    
+        const filteredSlots = businessHours.filter(time => {
+            if (selectedDate === todayDate) {
+                const [slotHour, slotMinute] = time.split(':').map(Number);
+                return (slotHour > currentHours) || (slotHour === currentHours && slotMinute > currentMinutes);
+            }
+            return true; // future dates, show all slots
+        });
+    
+        timeSlotsContainer.innerHTML = filteredSlots.map(time => {
             const isBooked = !availableSlots.includes(time);
             return `
                 <div class="time-slot ${isBooked ? 'booked' : ''}" 
@@ -455,12 +470,13 @@ class BookingSystem {
                 </div>
             `;
         }).join('');
-
-        // Add click handlers for time slots
+    
+        // Click handler
         timeSlotsContainer.querySelectorAll('.time-slot:not(.booked)').forEach(slot => {
             slot.addEventListener('click', () => this.handleTimeSlotSelection(slot));
         });
     }
+
 
     generateTimeSlots() {
         const slots = [];

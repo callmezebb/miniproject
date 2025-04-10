@@ -23,8 +23,16 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: '*'
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'], // Added PATCH and OPTIONS to allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+    preflightContinue: false,
+    optionsSuccessStatus: 204
 }));
+
+// Add options handling before other routes
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -35,15 +43,17 @@ app.use(express.static(path.join(__dirname, '..')));
 const authRoutes = require('./routes/auth');
 const salonRoutes = require('./routes/salons');
 const bookingRoutes = require('./routes/bookings');
-const hairstyleRoutes = require('./routes/hairstyles'); // Import hairstyles route
+const hairstyleRoutes = require('./routes/hairstyles');
 const serviceRoutes = require('./routes/services');
+const faceAnalysisRoutes = require('./routes/faceAnalysis');
 
 // Mount routes
 app.use('/api/auth', authRoutes);
 app.use('/api/salons', salonRoutes);
 app.use('/api/bookings', bookingRoutes);
-app.use('/api/hairstyles', hairstyleRoutes); // Mount hairstyles route
-app.use('/api/salons', serviceRoutes);
+app.use('/api/hairstyles', hairstyleRoutes);
+app.use('/api/services', serviceRoutes);
+app.use('/api/face', faceAnalysisRoutes);
 
 // Error handler
 app.use((err, req, res, next) => {

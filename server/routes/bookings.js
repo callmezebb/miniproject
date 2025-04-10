@@ -66,8 +66,29 @@ router.post('/', protect, async (req, res) => {
     }
 });
 
-// Cancel a booking
-router.put('/:id/cancel', protect, cancelBooking);
+// Cancel booking route
+router.patch('/cancel/:id', protect, async (req, res) => {
+    try {
+        const booking = await Booking.findById(req.params.id);
+        
+        if (!booking) {
+            return res.status(404).json({ message: 'Booking not found' });
+        }
+
+        // Check if user owns this booking or is admin
+        if (booking.userId.toString() !== req.user.id && req.user.role !== 'admin') {
+            return res.status(403).json({ message: 'Not authorized to cancel this booking' });
+        }
+
+        booking.status = 'cancelled';
+        await booking.save();
+
+        res.json({ success: true, data: booking });
+    } catch (error) {
+        console.error('Cancel booking error:', error);
+        res.status(500).json({ message: 'Error cancelling booking', error: error.message });
+    }
+});
 
 // Add this to your existing bookings routes
 router.get('/salon/:salonId', protect, getSalonBookings);

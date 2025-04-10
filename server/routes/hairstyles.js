@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Hairstyle = require('../models/Hairstyle'); // Corrected path to the Hairstyle model
 const { protect, authorize } = require('../middleware/auth');
+const { upload, analyzeFace } = require('../controllers/hairstyleController');
 
 // @route   POST /api/hairstyles
 // @desc    Create a new hairstyle
@@ -115,5 +116,7 @@ router.delete('/:id', protect, authorize('admin'), async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 });
+
+// POST route for face analysis
 
 module.exports = router;
