@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Modern Men's Grooming</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="payment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+     div #123 p {
+  color: white;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="user-dashboard.html">
+                <img src="images/logo2.webp" alt="GentsCut" style="height: 70px;">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="user-dashboard.html">Home</a></li>
+            <li><a href="face-analysis.html">Face Analysis</a></li>
+            <li><a href="my-appointments.html">My Appointments</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <section class="payment-section">
+        <div class="payment-container">
+            <h1>Complete Your Payment</h1>
+            
+            <div class="payment-grid">
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div id="appointmentDetails" class="summary-details">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                    <div class="total-amount">
+                        <h3>Total Amount</h3>
+                        <span id="totalAmount">₹0.00</span>
+                    </div>
+                </div>
+
+                <!-- Payment Form -->
+                <div class="payment-form">
+                    <h2>Payment Method</h2>
+                    <div class="payment-methods">
+                        <div class="payment-method">
+                            <input type="radio" id="upi" name="paymentMethod" value="upi">
+                            <label for="upi">UPI</label>
+                        </div>
+                        <div class="payment-method">
+                            <input type="radio" id="card" name="paymentMethod" value="card">
+                            <label for="card">Credit/Debit Card</label>
+                        </div>
+                    </div>
+
+                    <div id="upiForm" class="payment-details">
+                        <div class="form-group">
+                            <label for="upiId">UPI ID</label>
+                            <div id="123"><p>g</p> </div>
+                            <input type="text" id="upiId" placeholder="yourname@upi">
+                        </div>
+                    </div>
+
+                    <div id="cardForm" class="payment-details" style="display:none;">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <div id="123"><p>g</p> </div>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                              <div id="123"><p>g</p> </div>
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" id="expiryDate" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                              <div id="123"><p>g</p> </div>
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="payNowBtn" class="pay-button">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-phone"></i> xxxxxxxx23</p>
+                <p><i class="fas fa-envelope"></i> mensgrooming@gmail.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="payment.js"></script>
+</body>
+</html>

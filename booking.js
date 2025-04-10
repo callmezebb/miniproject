@@ -224,7 +224,14 @@ class BookingSystem {
         try {
             const salonData = JSON.parse(card.dataset.salonData);
             this.displaySalonDetails(salonData);
-            document.getElementById('summarySalon').textContent = salonData.name;
+
+            const summarySalonElement = document.getElementById('summarySalon');
+            if (summarySalonElement) {
+                summarySalonElement.textContent = salonData.name;
+            } else {
+                console.error('Element with ID "summarySalon" not found in the DOM');
+                alert('Summary element for salon not found');
+            }
         } catch (error) {
             console.error('Error displaying salon details:', error);
         }
@@ -508,7 +515,11 @@ class BookingSystem {
     prepareAndGoToStep4() {
         // Get service request from textarea or localStorage
         const serviceRequest = document.getElementById('hairstyleRequest').value || localStorage.getItem('selectedService') || 'No specific request';
-        
+
+        // Get special instructions
+        const specialInstructionsElement = document.getElementById('specialInstructions');
+        const specialInstructions = specialInstructionsElement ? specialInstructionsElement.value : 'None';
+
         // Prepare summary elements
         const summaryElements = {
             'summarySalon': this.selectedSalonId ? document.querySelector(`.salon-card[data-id="${this.selectedSalonId}"] h4`)?.textContent : 'Not selected',
@@ -520,7 +531,7 @@ class BookingSystem {
             }) : 'Not selected',
             'summaryTime': this.selectedTimeSlot || 'Not selected',
             'summaryHairstyle': serviceRequest,
-            'summaryInstructions': document.getElementById('specialInstructions').value || 'None'
+            'summaryInstructions': specialInstructions
         };
 
         // Update all summary elements
@@ -528,6 +539,8 @@ class BookingSystem {
             const element = document.getElementById(id);
             if (element) {
                 element.textContent = value;
+            } else {
+                console.warn(`Element with ID "${id}" not found in the DOM.`);
             }
         });
 
@@ -536,58 +549,75 @@ class BookingSystem {
     }
 
     async confirmBooking() {
-        if (!this.validateBooking()) {
-            return;
-        }
-
         try {
-            this.showLoading(true);
-            const userData = JSON.parse(localStorage.getItem('userData'));
-            const serviceRequest = document.getElementById('hairstyleRequest').value || localStorage.getItem('selectedService') || '';
-            
+            // Get required elements
+            const summaryElements = {
+                salon: document.getElementById('summarySalon'),
+                date: document.getElementById('summaryDate'),
+                time: document.getElementById('summaryTime'),
+                service: document.getElementById('summaryHairstyle')
+            };
+
+            // Validate all required elements exist
+            for (const [key, element] of Object.entries(summaryElements)) {
+                if (!element) {
+                    throw new Error(`Summary element for ${key} not found`);
+                }
+            }
+
+            // Create booking data object
             const bookingData = {
                 salonId: this.selectedSalonId,
                 date: this.selectedDate,
-                time: this.selectedTimeSlot,
-                hairstyleRequest: serviceRequest,
-                specialInstructions: document.getElementById('specialInstructions')?.value || '',
-                userName: userData.name || '',
-                userEmail: userData.email || '',
-                userPhone: userData.phone || '',
-                createdAt: new Date().toISOString(),
-                status: 'pending'
+                time: summaryElements.time.textContent,
+                hairstyleRequest: summaryElements.service.textContent
             };
 
+            // Validate booking data
+            if (!bookingData.salonId || !bookingData.date || !bookingData.time) {
+                throw new Error('Missing required booking information');
+            }
+
+            // Retrieve token from localStorage
+            const token = localStorage.getItem('userToken');
+            if (!token) {
+                console.error('User token not found. Redirecting to login...');
+                alert('Your session has expired. Please log in again.');
+                window.location.href = 'user-login.html';
+                return;
+            }
+
+            // Make API request to create booking
             const response = await fetch('http://localhost:5000/api/bookings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.token}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(bookingData)
             });
 
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to create booking');
+                const error = await response.json();
+                throw new Error(error.message || 'Failed to create booking');
             }
 
             const result = await response.json();
 
-            // Clear service selection from localStorage after successful booking
-            localStorage.removeItem('selectedService');
+            // Store appointment data for payment page
+            localStorage.setItem('appointmentData', JSON.stringify({
+                salonName: summaryElements.salon.textContent,
+                date: bookingData.date,
+                time: bookingData.time,
+                service: bookingData.hairstyleRequest // Ensure this field is populated
+            }));
 
-            this.showBookingSuccess(result);
-            this.showSuccess('Booking confirmed successfully!');
-            setTimeout(() => {
-                window.location.href = 'my-appointments.html';
-            }, 2000);
+            // Redirect to payment page
+            window.location.href = 'payment.html';
 
         } catch (error) {
             console.error('Error creating booking:', error);
-            this.showError(`Booking failed: ${error.message}`);
-        } finally {
-            this.showLoading(false);
+            alert(error.message || 'Failed to create booking. Please try again.');
         }
     }
 

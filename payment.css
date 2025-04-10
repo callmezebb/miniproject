@@ -1,0 +1,151 @@
+#123 p {
+  color: white;
+}
+.payment-details {
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  color: #000; /* Ensures black text inside inputs */
+  background-color: #fff; /* Makes input background visible if inherited */
+}
+label {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+}
+.payment-section {
+    padding: 4rem 2rem;
+    background-color: #f8f9fa;
+    min-height: calc(100vh - 200px);
+}
+
+.payment-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.payment-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.order-summary {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.summary-details {
+    margin: 1.5rem 0;
+}
+
+.summary-details p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.total-amount {
+    border-top: 2px solid #ddd;
+    padding-top: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.payment-method {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-method:hover {
+    border-color: #007bff;
+}
+
+.payment-method input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+.payment-details {
+    margin-top: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.pay-button {
+    width: 100%;
+    padding: 1rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.pay-button:hover {
+    background: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

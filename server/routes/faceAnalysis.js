@@ -8,9 +8,13 @@ dotenv.config();
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
+const app = express();
 
-// Enable CORS specifically for this route
-router.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5900', 'http://127.0.0.1:5900'],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+  }));
 
 router.post('/analyze-face', upload.single('image'), async (req, res) => {
     try {
